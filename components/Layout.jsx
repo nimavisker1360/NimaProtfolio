@@ -9,9 +9,9 @@ const sora = Sora({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
 });
 
-import Nav from "../components/Nav";
-import Header from "../components/Header";
-import TopLeftImg from "../components/TopLeftImg";
+import Nav from "./Nav";
+import Header from "./Header";
+import TopLeftImg from "./TopLeftImg";
 
 const Layout = ({ children }) => {
   return (

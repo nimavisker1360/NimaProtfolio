@@ -1,4 +1,5 @@
 import "../styles/globals.css";
+    
 import StarsCanvas from "../components/sub/StartComponent";
 import Layout from "../components/Layout";
 import Transition from "../components/Transition";

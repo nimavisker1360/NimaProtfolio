@@ -5,21 +5,21 @@ export const testimonialSlider = [
     name: "Anne Smith",
     position: "Customer",
     message:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum expedita odit beatae, cupiditate saepe quam officia aut placeat quas neque!",
+      "Outstanding developer! Delivered my project on time with exceptional quality. The UI/UX design was beyond expectations",
   },
   {
     image: "/t-avt-2.png",
     name: "Jane Doe",
     position: "Customer",
     message:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum expedita odit beatae, cupiditate saepe quam officia aut placeat quas neque!",
+      "Very professional and knowledgeable. Developed a seamless web application that boosted my business significantly.",
   },
   {
     image: "/t-avt-3.png",
-    name: "Jhon Doe",
+    name: "Morteza Dezpholi",
     position: "Customer",
     message:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum expedita odit beatae, cupiditate saepe quam officia aut placeat quas neque!",
+      "Highly recommend! A talented full-stack developer with great problem-solving skills and attention to detail.",
   },
 ];
 

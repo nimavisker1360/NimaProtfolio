@@ -7,7 +7,7 @@ import {
   RiTelegramFill,
   RiLinkedinBoxFill,
   RiDribbbleLine,
-  RiBehanceLine,
+
   RiGithubFill,
 } from "react-icons/ri";
 
