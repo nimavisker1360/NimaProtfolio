@@ -58,9 +58,9 @@ export const workSlider = {
           source: "https://minimalist-responsive-portfolio.vercel.app/",
         },
         {
-          title: "New Project 2",
-          path: "/new-image2.jpg",
-          source: "https://new-project2.vercel.app/",
+          title: "Care pulse",
+          path: "/care.jpg",
+          source: "https://care-pulse-hxyt91keg-nimas-projects-40d42c5f.vercel.app/",
         },
         {
           title: "New Project 3",
