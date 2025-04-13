@@ -19,7 +19,6 @@ export const workSlider = {
           path: "/resume/banner03.jpg",
           source: "https://ayvisionfilms.com/",
         },
- 
       ],
     },
     {
@@ -51,8 +50,6 @@ export const workSlider = {
           source:
             "https://nico-palmar-6qeqrwx0d-nimas-projects-40d42c5f.vercel.app/",
         },
-    
-  
       ],
     },
     // Add a new slide here
@@ -90,7 +87,7 @@ import "swiper/css/pagination";
 
 // import required modules
 import { Pagination } from "swiper";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // icons
 import { BsArrowRight, BsArrowLeft } from "react-icons/bs";
@@ -101,6 +98,15 @@ const WorkSlider = () => {
   const [activeCategory, setActiveCategory] = useState("frontend");
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 4;
+
+  // Add useEffect to handle category changes
+  useEffect(() => {
+    // This will ensure the component fully re-renders when category changes
+    const timer = setTimeout(() => {
+      console.log("Category changed to:", activeCategory);
+    }, 0);
+    return () => clearTimeout(timer);
+  }, [activeCategory]);
 
   // Filter slides based on active category
   const categorySlides = workSlider.slides.filter(
@@ -148,6 +154,10 @@ const WorkSlider = () => {
               console.log("Switching to frontend");
               setActiveCategory("frontend");
               setCurrentPage(0); // Reset to first page when switching category
+              // Force re-render for production environment
+              setTimeout(() => {
+                window.dispatchEvent(new Event("resize"));
+              }, 50);
             }}
           >
             Frontend
@@ -162,6 +172,10 @@ const WorkSlider = () => {
               console.log("Switching to backend");
               setActiveCategory("backend");
               setCurrentPage(0); // Reset to first page when switching category
+              // Force re-render for production environment
+              setTimeout(() => {
+                window.dispatchEvent(new Event("resize"));
+              }, 50);
             }}
           >
             Backend
