@@ -142,7 +142,7 @@ const WorkSlider = () => {
       <div className="flex justify-center mb-8">
         <div
           className="flex space-x-4 bg-[#1F1F3A] rounded-full p-1"
-          style={{ zIndex: 10 }}
+          style={{ zIndex: 50, position: "relative" }}
         >
           <button
             className={`py-2 px-6 rounded-full transition-all ${
