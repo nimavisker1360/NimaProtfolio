@@ -51,18 +51,8 @@ export const workSlider = {
           source:
             "https://nico-palmar-6qeqrwx0d-nimas-projects-40d42c5f.vercel.app/",
         },
-        {
-          title: "NICO-Palmer",
-          path: "/project-3.jpg",
-          source:
-            "https://nico-palmar-6qeqrwx0d-nimas-projects-40d42c5f.vercel.app/",
-        },
-        {
-          title: "NICO-Palmer",
-          path: "/project-3.jpg",
-          source:
-            "https://nico-palmar-6qeqrwx0d-nimas-projects-40d42c5f.vercel.app/",
-        },
+    
+  
       ],
     },
     // Add a new slide here
