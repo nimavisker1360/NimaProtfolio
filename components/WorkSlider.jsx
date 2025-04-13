@@ -48,7 +48,7 @@ export const workSlider = {
           title: "NICO-Palmer",
           path: "/project-3.jpg",
           source:
-            "https://nico-palmar-6qeqrwx0d-nimas-projects-40d42c5f.vercel.app/",
+            "https://nico-palmar.vercel.app/",
         },
       ],
     },
