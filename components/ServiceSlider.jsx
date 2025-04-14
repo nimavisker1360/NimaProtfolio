@@ -7,52 +7,83 @@ import "swiper/css/free-mode";
 import "swiper/css/pagination";
 
 // icons
-import {
-  RxReader,
-  RxRocket,
-  RxArrowTopRight,
-} from "react-icons/rx";
+import { RxReader, RxRocket, RxArrowTopRight } from "react-icons/rx";
 
 import { MdOutlineDeveloperMode } from "react-icons/md";
 import { FaDatabase } from "react-icons/fa";
 import { AiOutlineAntDesign } from "react-icons/ai";
 
-
-
 // import required modules
 import { FreeMode, Pagination } from "swiper";
+import { useTranslation } from "next-i18next";
 
 // service data
-export const serviceData = [
-  {
-    icon: <MdOutlineDeveloperMode />,
-    title: "Frontend:",
-    description: "React.js, Next.js, HTML, CSS, Tailwind CSS, JavaScript, TypeScript",
-  },
-  {
-    icon: <FaDatabase />,
-    title: "Backend & Databases",
-    description: "Node.js, Nest.js,MongoDB,AppWrite",
-  },
-  {
-    icon: <AiOutlineAntDesign />,
-    title: "UI/UX Design",
-    description: "Figma, Responsive Design",
-  },
-  {
-    icon: <RxReader />,
-    title: "Version Control",
-    description: "Git, GitHub, GitLab",
-  },
-  {
-    icon: <RxRocket />,
-    title: "Other",
-    description: "API Development, Payment Gateway Integration",
-  
-  },
-];
+const getServiceData = (language) => {
+  if (language === "tr") {
+    return [
+      {
+        icon: <MdOutlineDeveloperMode />,
+        title: "Frontend:",
+        description:
+          "React.js, Next.js, HTML, CSS, Tailwind CSS, JavaScript, TypeScript",
+      },
+      {
+        icon: <FaDatabase />,
+        title: "Backend ve Veritabanları",
+        description: "Node.js, Nest.js, MongoDB, AppWrite",
+      },
+      {
+        icon: <AiOutlineAntDesign />,
+        title: "UI/UX Tasarımı",
+        description: "Figma, Duyarlı Tasarım",
+      },
+      {
+        icon: <RxReader />,
+        title: "Sürüm Kontrolü",
+        description: "Git, GitHub, GitLab",
+      },
+      {
+        icon: <RxRocket />,
+        title: "Diğer",
+        description: "API Geliştirme, Ödeme Geçidi Entegrasyonu",
+      },
+    ];
+  } else {
+    return [
+      {
+        icon: <MdOutlineDeveloperMode />,
+        title: "Frontend:",
+        description:
+          "React.js, Next.js, HTML, CSS, Tailwind CSS, JavaScript, TypeScript",
+      },
+      {
+        icon: <FaDatabase />,
+        title: "Backend & Databases",
+        description: "Node.js, Nest.js, MongoDB, AppWrite",
+      },
+      {
+        icon: <AiOutlineAntDesign />,
+        title: "UI/UX Design",
+        description: "Figma, Responsive Design",
+      },
+      {
+        icon: <RxReader />,
+        title: "Version Control",
+        description: "Git, GitHub, GitLab",
+      },
+      {
+        icon: <RxRocket />,
+        title: "Other",
+        description: "API Development, Payment Gateway Integration",
+      },
+    ];
+  }
+};
 
 const ServiceSlider = () => {
+  const { i18n } = useTranslation("common");
+  const serviceData = getServiceData(i18n.language);
+
   return (
     <Swiper
       breakpoints={{

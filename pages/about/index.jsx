@@ -24,74 +24,171 @@ import Circles from "../../components/Circles";
 
 //counters
 import CountUp from "react-countup";
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 //  data
-const aboutData = [
-  {
-    title: "skills",
-    info: [
-      {
-        title: "Web Development",
-        icons: [
-          <FaHtml5 key="html5" />,
-          <FaCss3 key="css3" />,
-          <FaJs key="js" />,
-          <FaReact key="react" />,
-          <SiNextdotjs key="nextjs" />,
-          <SiFramer key="framer" />,
-          <FaWordpress key="wordpress" />,
-        ],
-      },
-      {
-        title: "UI/UX Design",
-        icons: [
-          <FaFigma key="figma" />,
-          <SiAdobexd key="adobexd" />,
-          <SiAdobephotoshop key="adobephotoshop" />,
-        ],
-      },
-    ],
-  },
+const aboutData = {
+  en: [
+    {
+      title: "skills",
+      info: [
+        {
+          title: "Web Development",
+          icons: [
+            <FaHtml5 key="html5" />,
+            <FaCss3 key="css3" />,
+            <FaJs key="js" />,
+            <FaReact key="react" />,
+            <SiNextdotjs key="nextjs" />,
+            <SiFramer key="framer" />,
+            <FaWordpress key="wordpress" />,
+          ],
+        },
+        {
+          title: "UI/UX Design",
+          icons: [
+            <FaFigma key="figma" />,
+            <SiAdobexd key="adobexd" />,
+            <SiAdobephotoshop key="adobephotoshop" />,
+          ],
+        },
+      ],
+    },
 
-  {
-    title: "experience",
-    info: [
-      {
-        title: "UX/UI Designer , FullStack Developer - Mabna Company",
-        stage: "2020 - 2023",
-      },
-      {
-        title: "Web Developer - Zebra-studio Agency",
-        stage: "2017 - 2020",
-      },
-      {
-        title: "Intern - Saba Studio Corporation",
-        stage: "2016 - 2017",
-      },
-    ],
-  },
-  {
-    title: "credentials",
-    info: [
-      {
-        title: "Web Development -  Hoze University",
-        stage: "2016",
-      },
-      {
-        title: "Computer Science Diploma - IranAzad Technical Institute",
-        stage: "2012",
-      },
-      {
-        title: "Certified Graphic Designer - ABC Institute, Tehran, Iran",
-        stage: "2010",
-      },
-    ],
-  },
-];
+    {
+      title: "experience",
+      info: [
+        {
+          title: "UX/UI Designer, FullStack Developer - Mabna Company",
+          stage: "2020 - 2023",
+        },
+        {
+          title: "Web Developer - Zebra-studio Agency",
+          stage: "2017 - 2020",
+        },
+        {
+          title: "Intern - Saba Studio Corporation",
+          stage: "2016 - 2017",
+        },
+      ],
+    },
+    {
+      title: "credentials",
+      info: [
+        {
+          title: "Web Development - Hoze University",
+          stage: "2016",
+        },
+        {
+          title: "Computer Science Diploma - IranAzad Technical Institute",
+          stage: "2012",
+        },
+        {
+          title: "Certified Graphic Designer - ABC Institute, Tehran, Iran",
+          stage: "2010",
+        },
+      ],
+    },
+  ],
+  tr: [
+    {
+      title: "yetenekler",
+      info: [
+        {
+          title: "Web Geliştirme",
+          icons: [
+            <FaHtml5 key="html5" />,
+            <FaCss3 key="css3" />,
+            <FaJs key="js" />,
+            <FaReact key="react" />,
+            <SiNextdotjs key="nextjs" />,
+            <SiFramer key="framer" />,
+            <FaWordpress key="wordpress" />,
+          ],
+        },
+        {
+          title: "UI/UX Tasarımı",
+          icons: [
+            <FaFigma key="figma" />,
+            <SiAdobexd key="adobexd" />,
+            <SiAdobephotoshop key="adobephotoshop" />,
+          ],
+        },
+      ],
+    },
+
+    {
+      title: "deneyim",
+      info: [
+        {
+          title: "UX/UI Tasarımcı, FullStack Geliştirici - Mabna Şirketi",
+          stage: "2020 - 2023",
+        },
+        {
+          title: "Web Geliştirici - Zebra-studio Ajansı",
+          stage: "2017 - 2020",
+        },
+        {
+          title: "Stajyer - Saba Studio Şirketi",
+          stage: "2016 - 2017",
+        },
+      ],
+    },
+    {
+      title: "eğitim",
+      info: [
+        {
+          title: "Web Geliştirme - Hoze Üniversitesi",
+          stage: "2016",
+        },
+        {
+          title: "Bilgisayar Bilimi Diploması - IranAzad Teknik Enstitüsü",
+          stage: "2012",
+        },
+        {
+          title: "Sertifikalı Grafik Tasarımcı - ABC Enstitüsü, Tahran, İran",
+          stage: "2010",
+        },
+      ],
+    },
+  ],
+};
 
 const About = () => {
   const [index, setIndex] = useState(0);
-  console.log(index);
+  const { t, i18n } = useTranslation("common");
+  const currentLanguage = i18n.language
+    ? i18n.language.startsWith("tr")
+      ? "tr"
+      : "en"
+    : "en";
+
+  // Description text based on language
+  const descriptionText = {
+    en: "6 years ago, I began freelancing as a developer. Since then, I've done remote work for agencies, consulted for startups, and collaborated on digital products for business and consumer use.",
+    tr: "6 yıl önce, serbest geliştirici olarak çalışmaya başladım. O zamandan beri, ajanslar için uzaktan çalıştım, startuplar için danışmanlık yaptım ve işletmeler ve tüketiciler için dijital ürünlerde işbirliği yaptım.",
+  };
+
+  // Heading text based on language
+  const headingText = {
+    en: "Captivating stories birth magnificent designs.",
+    tr: "Etkileyici hikayeler muhteşem tasarımlar doğurur.",
+  };
+
+  // Counter labels based on language
+  const counterLabels = {
+    en: {
+      yearsExperience: "Years of experience",
+      satisfiedClients: "Satisfied clients",
+      finishedProjects: "Finished Projects",
+    },
+    tr: {
+      yearsExperience: "Yıllık deneyim",
+      satisfiedClients: "Memnun müşteriler",
+      finishedProjects: "Tamamlanan projeler",
+    },
+  };
 
   return (
     <div className="h-full bg-primary/30 py-32 text-center xl:text-left">
@@ -106,6 +203,7 @@ const About = () => {
       >
         <Avatar />
       </motion.div>
+
       <div
         className="container mx-auto h-full flex flex-col items-center xl:flex-row
       gap-x-6"
@@ -119,8 +217,7 @@ const About = () => {
             exit="hidden"
             className="h2"
           >
-            Captivating <span className="text-accent"> stories </span> birth
-            magnificent designs.
+            {headingText[currentLanguage]}
           </motion.h2>
           <motion.p
             variants={fadeIn("right", 0.4)}
@@ -130,9 +227,7 @@ const About = () => {
             className="max-w-[500px] mx-auto xl:mx-0 mb-6 xl:mb-12
           px-2 xl:px-0"
           >
-            6 years ago , I began freelancing as a developer.Since then, I ve
-            done remote work for agencies, consulted for startups, and
-            collaborated on digital products for business and consumer use.
+            {descriptionText[currentLanguage]}
           </motion.p>
           {/* counters */}
           <motion.div
@@ -157,7 +252,7 @@ const About = () => {
                   className="text-xs uppercase tracking-[1px] leading-[1.4]
                 max-w-[100px]"
                 >
-                  Years of experience
+                  {counterLabels[currentLanguage].yearsExperience}
                 </div>
               </div>
               {/* clients */}
@@ -173,7 +268,7 @@ const About = () => {
                   className="text-xs uppercase tracking-[1px] leading-[1.4]
                 max-w-[100px]"
                 >
-                  Satisfied clients
+                  {counterLabels[currentLanguage].satisfiedClients}
                 </div>
               </div>
               {/* Projects */}
@@ -185,7 +280,7 @@ const About = () => {
                   className="text-xs uppercase tracking-[1px] leading-[1.4]
                 max-w-[100px]"
                 >
-                  Finished Project
+                  {counterLabels[currentLanguage].finishedProjects}
                 </div>
               </div>
             </div>
@@ -200,7 +295,7 @@ const About = () => {
           className="flex flex-col w-full xl:max-w-[48%] h-[480px]"
         >
           <div className="flex gap-x-4 xl:gap-x-8 mx-auto xl:mx-0 mb-4 ">
-            {aboutData.map((item, itemIndex) => {
+            {aboutData[currentLanguage].map((item, itemIndex) => {
               return (
                 <div
                   key={itemIndex}
@@ -220,7 +315,7 @@ const About = () => {
             className=" py-2 xl:py-6 flex flex-col gap-y-2 xl:gap-y-4 items-center
           xl:items-start"
           >
-            {aboutData[index].info.map((item, itemIndex) => {
+            {aboutData[currentLanguage][index].info.map((item, itemIndex) => {
               return (
                 <div
                   key={itemIndex}
@@ -257,5 +352,13 @@ const About = () => {
     </div>
   );
 };
+
+export async function getStaticProps({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["common"])),
+    },
+  };
+}
 
 export default About;

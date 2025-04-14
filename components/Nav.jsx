@@ -10,6 +10,7 @@ import {
 
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
 
 // nav data
 export const navData = [
@@ -29,9 +30,22 @@ export const navData = [
   },
 ];
 
+// Turkish translations mapping
+const turkishNavNames = {
+  home: "anasayfa",
+  about: "hakkimda",
+  services: "hizmetler",
+  work: "calismalar",
+  testimonials: "gorusler",
+  contact: "iletisim",
+};
+
 const Nav = () => {
   const router = useRouter();
   const pathname = router.pathname;
+  const { t } = useTranslation("common");
+  const { locale } = router;
+
   return (
     <nav
       className="flex flex-col justify-between items-center xl:justify-center gap-y-4 fixed h-max
@@ -55,7 +69,7 @@ const Nav = () => {
               <div className="absolute pr-14 right-0 hidden xl:group-hover:flex">
                 <div className="bg-white relative flex text-secondary items-center p-[8px] rounded-[3px]">
                   <div className="text-[12px] leading-none font-semibold capitalize">
-                    {link.name}
+                    {t(link.name)}
                   </div>
                   {/* triangle */}
                   <div className="border-solid border-l-white border-l-8 border-y-transparent border-y-[6px] border-r-0 absolute -right-2"></div>

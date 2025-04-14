@@ -1,6 +1,7 @@
 import Image from "next/image";
-
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
 
 import Socials from "./Socials";
 
@@ -13,7 +14,6 @@ const Header = () => {
         py-8"
         >
           {/* logo */}
-
           <Link href={"/"}>
             <Image
               src={"/LOGO.png"}
@@ -23,8 +23,14 @@ const Header = () => {
               priority={true}
             />
           </Link>
-          {/* socials */}
-          <Socials />
+
+          {/* nav links */}
+          <nav className="hidden lg:flex items-center gap-x-8"></nav>
+
+          {/* socials only */}
+          <div className="flex items-center gap-x-6">
+            <Socials />
+          </div>
         </div>
       </div>
     </header>

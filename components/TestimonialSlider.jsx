@@ -1,27 +1,52 @@
 // testimonial slider data
-export const testimonialSlider = [
-  {
-    image: "/t-avt-1.png",
-    name: "Anne Smith",
-    position: "Customer",
-    message:
-      "Outstanding developer! Delivered my project on time with exceptional quality. The UI/UX design was beyond expectations",
-  },
-  {
-    image: "/t-avt-2.png",
-    name: "Jane Doe",
-    position: "Customer",
-    message:
-      "Very professional and knowledgeable. Developed a seamless web application that boosted my business significantly.",
-  },
-  {
-    image: "/t-avt-3.png",
-    name: "Morteza Dezpholi",
-    position: "Customer",
-    message:
-      "Highly recommend! A talented full-stack developer with great problem-solving skills and attention to detail.",
-  },
-];
+const testimonialData = {
+  en: [
+    {
+      image: "/t-avt-1.png",
+      name: "Anne Smith",
+      position: "Customer",
+      message:
+        "Outstanding developer! Delivered my project on time with exceptional quality. The UI/UX design was beyond expectations",
+    },
+    {
+      image: "/t-avt-2.png",
+      name: "Jane Doe",
+      position: "Customer",
+      message:
+        "Very professional and knowledgeable. Developed a seamless web application that boosted my business significantly.",
+    },
+    {
+      image: "/t-avt-3.png",
+      name: "Morteza Dezpholi",
+      position: "Customer",
+      message:
+        "Highly recommend! A talented full-stack developer with great problem-solving skills and attention to detail.",
+    },
+  ],
+  tr: [
+    {
+      image: "/t-avt-1.png",
+      name: "Anne Smith",
+      position: "Müşteri",
+      message:
+        "Olağanüstü geliştirici! Projemi zamanında ve istisnai kalitede teslim etti. UI/UX tasarımı beklentilerin ötesindeydi.",
+    },
+    {
+      image: "/t-avt-2.png",
+      name: "Jane Doe",
+      position: "Müşteri",
+      message:
+        "Çok profesyonel ve bilgili. İşimi önemli ölçüde artıran sorunsuz bir web uygulaması geliştirdi.",
+    },
+    {
+      image: "/t-avt-3.png",
+      name: "Morteza Dezpholi",
+      position: "Müşteri",
+      message:
+        "Kesinlikle tavsiye ederim! Harika problem çözme becerileri ve detaylara dikkat eden yetenekli bir full-stack geliştirici.",
+    },
+  ],
+};
 
 // import swiper react components
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -33,6 +58,7 @@ import "swiper/css/pagination";
 
 // import required modules
 import { Navigation, Pagination } from "swiper";
+import { useTranslation } from "next-i18next";
 
 // icons
 import { FaQuoteLeft } from "react-icons/fa";
@@ -40,6 +66,10 @@ import { FaQuoteLeft } from "react-icons/fa";
 import Image from "next/image";
 
 const TestimonialSlider = () => {
+  const { i18n } = useTranslation("common");
+  const currentLang = i18n.language || "en";
+  const testimonialSlider = testimonialData[currentLang] || testimonialData.en;
+
   return (
     <Swiper
       navigation={true}
@@ -49,7 +79,6 @@ const TestimonialSlider = () => {
       modules={[Navigation, Pagination]}
       className="h-[400px]"
     >
- 
       {testimonialSlider.map((person, index) => {
         return (
           <SwiperSlide key={index}>

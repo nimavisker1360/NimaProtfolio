@@ -1,0 +1,42 @@
+{
+  "home": "Home",
+  "about": "About",
+  "services": "Services",
+  "work": "Work",
+  "testimonials": "Testimonials",
+  "contact": "Contact",
+  "hello": "Hello",
+  "name": "My name is",
+  "developer": "I'm a Full Stack Software Engineer with experience in Website, Mobile, and Software development. Check out my projects and skills.",
+  "projectsButton": "My Projects",
+  "aboutMe": "About me",
+  "skills": "My skills",
+  "contactMe": "Contact me",
+  "sendMessage": "Send message",
+  "headline": "Transforming ideas into Digital Reality",
+
+  "about_page": {
+    "heading": "Captivating stories birth magnificent designs.",
+    "description": "6 years ago, I began freelancing as a developer. Since then, I've done remote work for agencies, consulted for startups, and collaborated on digital products for business and consumer use.",
+    "yearsExperience": "Years of experience",
+    "satisfiedClients": "Satisfied clients",
+    "finishedProjects": "Finished Projects",
+    "skills": "skills",
+    "experience": "experience",
+    "credentials": "credentials",
+    "webDevelopment": "Web Development",
+    "uiUxDesign": "UI/UX Design"
+  },
+
+  "services_page": {
+    "title": "My services",
+    "services": "Frontend\nBackend\nUI/UX Design\nDatabases"
+  },
+
+  "work_page": {
+    "title": "My work",
+    "point1": "Implemented websites, and landing pages 𝐟𝐫𝐨𝐦 𝐜𝐨𝐧𝐜𝐞𝐩𝐭 𝐭𝐨 𝐝𝐞𝐩𝐥𝐨𝐲𝐦𝐞𝐧𝐭.",
+    "point2": "Assessed UX and UI designs for technical feasibility.",
+    "point3": "We have a talented pool of technical professionals experienced in the latest technology solutions, skilled and passionate for Front-end, Backend"
+  }
+}

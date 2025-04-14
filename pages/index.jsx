@@ -4,11 +4,16 @@ import ParticleContainer from "../components/ParticlesContainer";
 import projectsBtn from "../components/ProjectsBtn";
 import Avatar from "../components/Avatar";
 import { motion } from "framer-motion";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 
 import { fadeIn } from "../variants";
 import ProjectsBtn from "../components/ProjectsBtn";
 
 const Home = () => {
+  const { t, i18n } = useTranslation("common");
+  const currentLanguage = i18n.language;
+
   return (
     <div className="bg-primary/60 h-full">
       {/* text */}
@@ -25,8 +30,17 @@ const Home = () => {
             exit="hidden"
             className="h1"
           >
-            Transforming Ideas <br />
-            Into <span className="text-accent">Digital Reality</span>
+            {currentLanguage === "tr"
+              ? "Fikirleri Dönüştürmek"
+              : "Transforming Ideas"}{" "}
+            <br />
+            {currentLanguage === "tr" ? (
+              <span className="text-red-500">Dijital Gerçekliğe</span>
+            ) : (
+              <>
+                Into <span className="text-red-500">Digital Reality</span>
+              </>
+            )}
           </motion.h1>
           {/* subtitle */}
           <motion.p
@@ -36,8 +50,7 @@ const Home = () => {
             exit="hidden"
             className="max-w-sm xl:max-w-xl mx-auto xl:mx-0 mb-10 xl:mb-16"
           >
-            I&apos;m a Full Stack Software Engineer with experience in Website,
-            Mobile, and Software development. Check out my projects and skills.
+            {t("developer")}
           </motion.p>
           {/* btn */}
           <div className="flex justify-center xl:hidden relative">
@@ -78,5 +91,13 @@ const Home = () => {
     </div>
   );
 };
+
+export async function getStaticProps({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["common"])),
+    },
+  };
+}
 
 export default Home;

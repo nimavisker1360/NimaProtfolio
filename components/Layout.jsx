@@ -12,11 +12,15 @@ const sora = Sora({
 import Nav from "./Nav";
 import Header from "./Header";
 import TopLeftImg from "./TopLeftImg";
+import LanguageToggle from "./LanguageToggle";
 
 const Layout = ({ children }) => {
   return (
-    <div className={`page bg-site text-white bg-cover bg-no-repeat ${sora.variable} font-sora relative`}>
+    <div
+      className={`page bg-site text-white bg-cover bg-no-repeat ${sora.variable} font-sora relative`}
+    >
       <TopLeftImg />
+      <LanguageToggle />
       <Nav />
       <Header />
       {children}

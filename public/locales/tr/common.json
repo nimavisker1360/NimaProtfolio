@@ -1,0 +1,42 @@
+{
+  "anasayfa": "Ana Sayfa",
+  "hakkimda": "Hakkımda",
+  "hizmetler": "Hizmetler",
+  "calismalar": "Çalışmalarım",
+  "gorusler": "Görüşler",
+  "iletisim": "İletişim",
+  "merhaba": "Merhaba",
+  "adim": "Benim adım",
+  "developer": "Web, mobil ve yazılım geliştirme konusunda deneyimli bir Full Stack Yazılım Mühendisiyim. Projelerime ve yeteneklerime göz atabilirsin.",
+  "projelerim": "Projelerim",
+  "benimHakkimda": "Benim Hakkımda",
+  "yeteneklerim": "Yeteneklerim",
+  "benimleIletisimeGec": "Benimle İletişime Geç",
+  "mesajGonder": "Mesaj Gönder",
+  "manşet": "Fikirleri Dijital Gerçekliğe Dönüştürüyorum",
+
+  "about_page": {
+    "heading": "Etkileyici hikayeler muhteşem tasarımlar doğurur.",
+    "description": "6 yıl önce, serbest geliştirici olarak çalışmaya başladım. O zamandan beri, ajanslar için uzaktan çalıştım, startuplar için danışmanlık yaptım ve işletmeler ve tüketiciler için dijital ürünlerde işbirliği yaptım.",
+    "yearsExperience": "Yıllık deneyim",
+    "satisfiedClients": "Memnun müşteriler",
+    "finishedProjects": "Tamamlanan projeler",
+    "skills": "yetenekler",
+    "experience": "deneyim",
+    "credentials": "eğitim",
+    "webDevelopment": "Web Geliştirme",
+    "uiUxDesign": "UI/UX Tasarımı"
+  },
+
+  "services_page": {
+    "title": "Hizmetlerim",
+    "services": "Frontend\nBackend\nUI/UX Tasarımı\nVeritabanları"
+  },
+
+  "work_page": {
+    "title": "Çalışmalarım",
+    "point1": "Konseptten yayına kadar web siteleri ve açılış sayfaları uyguladım.",
+    "point2": "UX ve UI tasarımlarını teknik fizibilite açısından değerlendirdim.",
+    "point3": "En son teknoloji çözümlerinde deneyimli, 𝐅𝐫𝐨𝐧𝐭-𝐞𝐧𝐝 ve 𝐁𝐚𝐜𝐤𝐞𝐧𝐝 konularında yetenekli ve tutkulu teknik profesyonellerden oluşan yetenekli bir havuzumuz var."
+  }
+}
