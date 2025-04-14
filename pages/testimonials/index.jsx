@@ -30,8 +30,8 @@ const Testimonials = () => {
     <div className="h-full bg-primary/30 py-32 text-center">
       <div className="container mx-auto h-full flex flex-col justify-center">
         <ParticlesContainer />
-        {/* language toggle */}
-        <div className="absolute top-8 right-8 z-10">
+        {/* language toggle - hidden on mobile, visible on md screens and up */}
+        <div className="absolute top-8 right-8 z-10 hidden md:block">
           <div className="flex space-x-2">
             <button
               className={`px-3 py-1 rounded ${

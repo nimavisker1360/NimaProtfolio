@@ -12,7 +12,7 @@ const LanguageToggle = () => {
   };
 
   return (
-    <div className="absolute top-8 right-8 z-[100]">
+    <div className="absolute top-8 right-8 z-[100] hidden lg:block">
       <div className="flex space-x-2">
         <button
           className={`px-3 py-1 rounded ${

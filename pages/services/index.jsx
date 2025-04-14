@@ -36,7 +36,7 @@ const Services = () => {
 
       <div className="container mx-auto">
         {/* language toggle */}
-        <div className="absolute top-8 right-8 z-10">
+        <div className="absolute top-8 right-8 z-10 hidden md:block">
           <div className="flex space-x-2">
             <button
               className={`px-3 py-1 rounded ${
