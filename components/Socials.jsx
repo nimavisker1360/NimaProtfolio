@@ -7,13 +7,12 @@ import {
   RiTelegramFill,
   RiLinkedinBoxFill,
   RiDribbbleLine,
-
   RiGithubFill,
 } from "react-icons/ri";
 
 const Socials = () => {
   return (
-    <div className="relative flex flex-row xl:max-w-md xl:right-[8%]  bottom-0 mt-auto   items-center justify-center  gap-x-5 text-[1.2rem] w-full">
+    <div className="flex flex-row items-center gap-4 text-xl">
       <Link href={""} className="hover:text-accent transition-all duration-300">
         <RiYoutubeLine />
       </Link>
@@ -35,7 +34,6 @@ const Socials = () => {
       >
         <RiDribbbleLine />
       </Link>
-   
       <Link
         href={"https://github.com/nimavisker1360"}
         className="hover:text-accent transition-all duration-300"

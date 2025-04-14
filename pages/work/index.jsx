@@ -39,24 +39,17 @@ const Work = () => {
   // Define title class based on language
   const titleClassName =
     currentLang === "tr"
-      ? "text-[36px] lg:text-[46px] font-primary xl:mt-12 mb-8"
-      : "h2 xl:mt-12 mb-4";
+      ? "text-[28px] md:text-[32px] lg:text-[38px] font-primary mb-3"
+      : "text-[28px] md:text-[32px] lg:text-[38px] font-primary mb-3";
 
   return (
-    <div className="h-full bg-primary/30 py-36 flex items-center">
+    <div className="h-full bg-primary/30 pt-16 pb-10 flex items-center">
       <Circles />
       <ParticlesContainer />
-      <div className="container mx-auto text-sm">
-        <div className="flex flex-col xl:flex-row gap-x-8">
-          {/* language toggle */}
-          <div className="absolute top-8 right-8 z-10">
-            <div className="flex space-x-2">
-      
-            </div>
-          </div>
-
+      <div className="container mx-auto px-4 md:px-8">
+        <div className="flex flex-col xl:flex-row gap-y-6 gap-x-12 items-center">
           {/* text */}
-          <div className="text-left pt-[120px] flex xl:w-[30vw] xl:pt-0 flex-col lg:text-left mb-4">
+          <div className="text-center xl:text-left pt-4 flex flex-col xl:w-[30vw] mb-4 xl:mb-0 xl:border-l-2 xl:border-accent/60 xl:pl-6">
             <motion.h2
               variants={fadeIn("up", 0.2)}
               initial="hidden"
@@ -66,17 +59,23 @@ const Work = () => {
             >
               {content.title} <span className="text-accent">.</span>
             </motion.h2>
-            <motion.p
+            <motion.div
               variants={fadeIn("up", 0.4)}
               initial="hidden"
               animate="show"
               exit="hidden"
-              className="mb-4 max-w-[400px] mx-auto lg:mx-0"
+              className="mb-3 max-w-[450px] mx-auto xl:mx-0 text-left text-sm md:text-base"
             >
-              • {content.point1}
-              <br />• {content.point2}
-              <br />• {content.point3}
-            </motion.p>
+              <p className="mb-2 pl-2 border-l-2 border-accent/60 ml-2 xl:border-l-0 xl:pl-0 xl:ml-0 xl:mb-4">
+                {content.point1}
+              </p>
+              <p className="mb-2 pl-2 border-l-2 border-accent/60 ml-2 xl:border-l-0 xl:pl-0 xl:ml-0 xl:mb-4">
+                {content.point2}
+              </p>
+              <p className="pl-2 border-l-2 border-accent/60 ml-2 xl:border-l-0 xl:pl-0 xl:ml-0">
+                {content.point3}
+              </p>
+            </motion.div>
           </div>
 
           {/* slider */}
@@ -85,7 +84,7 @@ const Work = () => {
             initial="hidden"
             animate="show"
             exit="hidden"
-            className="w-full xl:max-w-[65%]"
+            className="w-full xl:max-w-[62%] scale-95 origin-top px-1 xl:px-0"
           >
             <WorkSlider />
           </motion.div>

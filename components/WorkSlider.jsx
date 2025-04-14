@@ -47,8 +47,7 @@ export const workSlider = {
         {
           title: "NICO-Palmer",
           path: "/project-3.jpg",
-          source:
-            "https://nico-palmar.vercel.app/",
+          source: "https://nico-palmar.vercel.app/",
         },
       ],
     },
@@ -87,7 +86,7 @@ import "swiper/css/pagination";
 
 // import required modules
 import { Pagination, Navigation, FreeMode } from "swiper";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 // icons
 import { BsArrowRight, BsArrowLeft } from "react-icons/bs";
@@ -98,6 +97,7 @@ const WorkSlider = () => {
   const [activeCategory, setActiveCategory] = useState("frontend");
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 4;
+  const swiperRef = useRef(null);
 
   // Add useEffect to handle category changes
   useEffect(() => {
@@ -129,11 +129,19 @@ const WorkSlider = () => {
 
   // Functions to handle pagination
   const goToNextPage = () => {
-    setCurrentPage((prev) => (prev + 1) % totalPages);
+    if (swiperRef.current && swiperRef.current.swiper) {
+      swiperRef.current.swiper.slideNext();
+    } else {
+      setCurrentPage((prev) => (prev + 1) % totalPages);
+    }
   };
 
   const goToPrevPage = () => {
-    setCurrentPage((prev) => (prev === 0 ? totalPages - 1 : prev - 1));
+    if (swiperRef.current && swiperRef.current.swiper) {
+      swiperRef.current.swiper.slidePrev();
+    } else {
+      setCurrentPage((prev) => (prev === 0 ? totalPages - 1 : prev - 1));
+    }
   };
 
   return (
@@ -185,14 +193,18 @@ const WorkSlider = () => {
 
       {/* Swiper for touch-enabled mobile navigation */}
       <Swiper
+        ref={swiperRef}
         slidesPerView={1}
         spaceBetween={0}
-        navigation={false}
+        navigation={{
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        }}
         pagination={{
           clickable: true,
           dynamicBullets: true,
         }}
-        modules={[Pagination, FreeMode]}
+        modules={[Pagination, Navigation, FreeMode]}
         className="mySwiper"
         onSlideChange={(swiper) => setCurrentPage(swiper.activeIndex)}
         initialSlide={currentPage}
@@ -261,7 +273,7 @@ const WorkSlider = () => {
         >
           <button
             onClick={goToPrevPage}
-            className="flex items-center justify-center w-10 h-10 rounded-full bg-[#1F1F3A] text-white hover:bg-gradient-to-r from-[#4a22bd] to-[#e838cc]"
+            className="flex items-center justify-center w-10 h-10 rounded-full bg-[#1F1F3A] text-white hover:bg-gradient-to-r from-[#4a22bd] to-[#e838cc] cursor-pointer active:scale-95 transition-transform swiper-button-prev"
           >
             <BsArrowLeft />
           </button>
@@ -270,7 +282,7 @@ const WorkSlider = () => {
           </div>
           <button
             onClick={goToNextPage}
-            className="flex items-center justify-center w-10 h-10 rounded-full bg-[#1F1F3A] text-white hover:bg-gradient-to-r from-[#4a22bd] to-[#e838cc]"
+            className="flex items-center justify-center w-10 h-10 rounded-full bg-[#1F1F3A] text-white hover:bg-gradient-to-r from-[#4a22bd] to-[#e838cc] cursor-pointer active:scale-95 transition-transform swiper-button-next"
           >
             <BsArrowRight />
           </button>
