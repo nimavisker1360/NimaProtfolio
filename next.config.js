@@ -5,6 +5,10 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   i18n,
+  i18n: {
+    ...i18n,
+    localeDetection: true,
+  },
 };
 
 module.exports = nextConfig;
