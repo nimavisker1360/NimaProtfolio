@@ -1,10 +1,10 @@
-import { Particles } from "react-tsparticles";
-import { loadFull } from "tsparticles";
+import { Particles } from "@tsparticles/react";
+import { loadSlim } from "@tsparticles/slim";
 import React, { useCallback } from "react";
 
 const ParticlesContainer = () => {
   const particleInit = useCallback(async (engine) => {
-    await loadFull(engine);
+    await loadSlim(engine);
   }, []);
 
   const particleLoaded = useCallback(async () => {}, []);
@@ -33,18 +33,17 @@ const ParticlesContainer = () => {
               enable: true,
               mode: "repulse",
             },
-            resize:true,
-
+            resize: true,
           },
-          modes:{
-            push:{
-              quantity: 90
+          modes: {
+            push: {
+              quantity: 90,
             },
-            repulse:{
+            repulse: {
               distance: 200,
-              duration: 0.4
-            }
-          }
+              duration: 0.4,
+            },
+          },
         },
         particles: {
           color: {
