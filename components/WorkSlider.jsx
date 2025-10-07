@@ -61,6 +61,11 @@ export const workSlider = {
           source: "https://property-pulse-hazel.vercel.app/",
         },
         {
+          title: "Signals",
+          path: "/signals.png",
+          source: "https://signalist-stock-tracker-lime.vercel.app/",
+        },
+        {
           title: "Care pulse",
           path: "/care.jpg",
           source:
