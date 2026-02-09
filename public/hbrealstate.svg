@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">HB Real State</title>
+  <desc id="desc">Project cover for HB Real State website</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10203f" />
+      <stop offset="50%" stop-color="#1f4b8f" />
+      <stop offset="100%" stop-color="#1ea0d8" />
+    </linearGradient>
+    <linearGradient id="card" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.16" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.05" />
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)" />
+  <circle cx="1280" cy="220" r="220" fill="#ffffff" fill-opacity="0.08" />
+  <circle cx="230" cy="760" r="280" fill="#ffffff" fill-opacity="0.08" />
+  <rect x="140" y="150" width="1320" height="600" rx="36" fill="url(#card)" stroke="#ffffff" stroke-opacity="0.25" />
+  <g fill="#ffffff">
+    <path d="M320 530V355h56v62h58v-62h56v175h-56v-65h-58v65z" />
+    <path d="M556 530V355h92q36 0 57 19t21 51q0 33-21 52t-57 19h-36v34zm56-78h31q14 0 21-7t7-19q0-13-7-20t-21-7h-31z" />
+    <path d="M783 530V355h151v46h-95v24h84v44h-84v61z" />
+  </g>
+  <text x="320" y="610" fill="#dceeff" font-family="Segoe UI, Arial, sans-serif" font-size="74" font-weight="700" letter-spacing="4">REAL STATE</text>
+  <text x="320" y="678" fill="#e8f4ff" font-family="Segoe UI, Arial, sans-serif" font-size="38" font-weight="500">hbrealstate.com</text>
+  <g stroke="#ffffff" stroke-opacity="0.5" stroke-width="10" fill="none" transform="translate(1100 410)">
+    <path d="M0 120L90 40l90 80" />
+    <rect x="38" y="120" width="104" height="120" rx="10" />
+  </g>
+</svg>

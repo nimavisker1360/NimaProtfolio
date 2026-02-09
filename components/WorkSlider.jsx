@@ -56,9 +56,9 @@ export const workSlider = {
       category: "backend",
       images: [
         {
-          title: "Property-pulse",
-          path: "/Property-pulse.png",
-          source: "https://property-pulse-hazel.vercel.app/",
+          title: "HB Real State",
+          path: "/hbrealstate.svg",
+          source: "https://hbrealstate.com/",
         },
         {
           title: "Signals",

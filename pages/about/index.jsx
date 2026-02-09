@@ -60,16 +60,16 @@ const aboutData = {
       title: "experience",
       info: [
         {
-          title: "UX/UI Designer, FullStack Developer - Mabna Company",
-          stage: "2020 - 2023",
+          title: "Senior Full Stack Developer - HB Real State",
+          stage: "2025 - 2026",
         },
         {
-          title: "Web Developer - Zebra-studio Agency",
-          stage: "2017 - 2020",
+          title: "Frontend Developer - Freelance & Agency Projects",
+          stage: "2024 - 2025",
         },
         {
-          title: "Intern - Saba Studio Corporation",
-          stage: "2016 - 2017",
+          title: "Web Developer - Remote Client Projects",
+          stage: "2023 - 2024",
         },
       ],
     },
@@ -122,16 +122,16 @@ const aboutData = {
       title: "deneyim",
       info: [
         {
-          title: "UX/UI Tasarımcı, FullStack Geliştirici - Mabna Şirketi",
-          stage: "2020 - 2023",
+          title: "Kıdemli Full Stack Geliştirici - HB Real State",
+          stage: "2025 - 2026",
         },
         {
-          title: "Web Geliştirici - Zebra-studio Ajansı",
-          stage: "2017 - 2020",
+          title: "Frontend Geliştirici - Freelance ve Ajans Projeleri",
+          stage: "2024 - 2025",
         },
         {
-          title: "Stajyer - Saba Studio Şirketi",
-          stage: "2016 - 2017",
+          title: "Web Geliştirici - Uzaktan Müşteri Projeleri",
+          stage: "2023 - 2024",
         },
       ],
     },
