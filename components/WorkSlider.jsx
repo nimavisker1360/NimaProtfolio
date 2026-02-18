@@ -56,6 +56,11 @@ export const workSlider = {
       category: "backend",
       images: [
         {
+          title: "CodeFlex AI",
+          path: "/ai-avatar.png",
+          source: "https://codeflex-ai-dun.vercel.app/",
+        },
+        {
           title: "HB Real State",
           path: "/hbrealstate.svg",
           source: "https://hbrealstate.com/",
@@ -231,17 +236,18 @@ const WorkSlider = () => {
                 {pageImages.map((image, index) => {
                   return (
                     <div
-                      className="relative rounded-lg overflow-hidden flex items-center justify-center group"
+                      className="relative h-full rounded-lg overflow-hidden flex items-center justify-center group"
                       onClick={() => window.open(image.source, "_blank")}
                       key={index}
                     >
-                      <div className="flex items-center justify-center relative overflow-hidden group">
+                      <div className="relative w-full h-full overflow-hidden group">
                         {/* image */}
                         <Image
                           src={image.path}
-                          width={500}
-                          height={300}
-                          alt=""
+                          fill
+                          sizes="(max-width: 640px) 45vw, 25vw"
+                          alt={image.title}
+                          className="object-cover"
                         />
                         {/* overlay gradient */}
                         <div className="absolute inset-0 bg-gradient-to-l from-transparent via-[#e838cc] to-[#4a22bd] opacity-0 group-hover:opacity-80 transition-all duration-700"></div>
