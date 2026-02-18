@@ -166,8 +166,16 @@ const About = () => {
 
   // Description text based on language
   const descriptionText = {
-    en: "6 years ago, I began freelancing as a developer. Since then, I've done remote work for agencies, consulted for startups, and collaborated on digital products for business and consumer use.",
-    tr: "6 yıl önce, serbest geliştirici olarak çalışmaya başladım. O zamandan beri, ajanslar için uzaktan çalıştım, startuplar için danışmanlık yaptım ve işletmeler ve tüketiciler için dijital ürünlerde işbirliği yaptım.",
+    en: [
+      "I started my journey as a freelance developer over 6 years ago, and since then I have worked with startups, agencies, and independent clients across different industries.",
+      "My focus is building fast, scalable, and user-friendly digital products from idea to launch. I work across frontend and backend, and I care deeply about clean architecture, performance, and maintainable code.",
+      "Beyond shipping features, I help teams make better product decisions by connecting business goals with practical technical solutions. I value communication, ownership, and delivering reliable results on time.",
+    ],
+    tr: [
+      "6 yildan fazla once freelance gelistirici olarak calismaya basladim ve o gunden beri startup, ajans ve bireysel musterilerle farkli sektorlerde projeler gelistirdim.",
+      "Odak noktam, fikir asamasindan yayina kadar hizli, olceklenebilir ve kullanici dostu dijital urunler olusturmaktir. Frontend ve backend tarafinda calisirken temiz mimari, performans ve surdurulebilir kod kalitesine oncelik veririm.",
+      "Sadece ozellik gelistirmekle kalmam, is hedeflerini dogru teknik cozumlerle birlestirerek ekiplerin daha iyi urun kararleri almasina da destek olurum. Iletisim, sorumluluk ve zamaninda kaliteli teslim benim icin temel prensiplerdir.",
+    ],
   };
 
   // Heading text based on language
@@ -205,30 +213,30 @@ const About = () => {
       </motion.div>
 
       <div
-        className="container mx-auto h-full flex flex-col items-center xl:flex-row
-      gap-x-6"
+        className="container mx-auto h-full flex flex-col items-center xl:items-start xl:flex-row gap-y-10 xl:gap-x-12"
       >
         {/* text */}
-        <div className="flex-1 flex flex-col justify-center">
+        <div className="flex-1 xl:basis-[56%] flex flex-col justify-center xl:pr-4">
           <motion.h2
             variants={fadeIn("right", 0.2)}
             initial="hidden"
             animate="show"
             exit="hidden"
-            className="h2"
+            className="h2 max-w-[640px] mx-auto xl:mx-0"
           >
             {headingText[currentLanguage]}
           </motion.h2>
-          <motion.p
+          <motion.div
             variants={fadeIn("right", 0.4)}
             initial="hidden"
             animate="show"
             exit="hidden"
-            className="max-w-[500px] mx-auto xl:mx-0 mb-6 xl:mb-12
-          px-2 xl:px-0"
+            className="max-w-[640px] mx-auto xl:mx-0 mb-6 xl:mb-12 px-2 xl:px-0 text-justify space-y-5"
           >
-            {descriptionText[currentLanguage]}
-          </motion.p>
+            {descriptionText[currentLanguage].map((paragraph, paragraphIndex) => (
+              <p key={paragraphIndex}>{paragraph}</p>
+            ))}
+          </motion.div>
           {/* counters */}
           <motion.div
             variants={fadeIn("right", 0.6)}
@@ -292,9 +300,9 @@ const About = () => {
           initial="hidden"
           animate="show"
           exit="hidden"
-          className="flex flex-col w-full xl:max-w-[48%] h-[480px]"
+          className="flex flex-col w-full xl:basis-[44%] xl:max-w-[44%] min-h-[420px]"
         >
-          <div className="flex gap-x-4 xl:gap-x-8 mx-auto xl:mx-0 mb-4 ">
+          <div className="flex w-full gap-x-4 xl:gap-x-8 mb-6 justify-center xl:justify-start">
             {aboutData[currentLanguage].map((item, itemIndex) => {
               return (
                 <div
@@ -312,21 +320,19 @@ const About = () => {
             })}
           </div>
           <div
-            className=" py-2 xl:py-6 flex flex-col gap-y-2 xl:gap-y-4 items-center
-          xl:items-start"
+            className="py-2 xl:py-4 flex flex-col gap-y-3 xl:gap-y-4 items-start"
           >
             {aboutData[currentLanguage][index].info.map((item, itemIndex) => {
               return (
                 <div
                   key={itemIndex}
-                  className="flex-1 flex flex-col md:flex-row md:text-[16px] 
-                max-w-max gap-x-1 items-center text-white/60  "
+                  className="w-full flex flex-col md:flex-row md:text-[16px] gap-x-2 items-start md:items-center text-white/70"
                 >
                   {/* title */}
-                  <div className="font-light  mb-2 md:mb-0">{item.title}</div>
-                  <div className="hidden md:flex mb-2">,</div>
-                  <div className="text-accent">{item.stage}</div>
-                  <div className="flex gap-x-4">
+                  <div className="font-light mb-1 md:mb-0">{item.title}</div>
+                  {item.stage ? <div className="hidden md:flex mb-1">,</div> : null}
+                  {item.stage ? <div className="text-accent">{item.stage}</div> : null}
+                  <div className="flex gap-x-4 mt-1 md:mt-0">
                     {/* icons */}
                     {item.icons ? (
                       <div className="flex gap-x-4">
@@ -362,3 +368,4 @@ export async function getStaticProps({ locale }) {
 }
 
 export default About;
+

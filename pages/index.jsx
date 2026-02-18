@@ -1,21 +1,29 @@
-import Image from "next/image";
-import StarsCanvas from "../components/sub/StartComponent";
 import ParticleContainer from "../components/ParticlesContainer";
-import projectsBtn from "../components/ProjectsBtn";
 import Avatar from "../components/Avatar";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 
 import { fadeIn } from "../variants";
 import ProjectsBtn from "../components/ProjectsBtn";
+import AiAssistantPanel from "../components/AiAssistantPanel";
 
 const Home = () => {
   const { t, i18n } = useTranslation("common");
   const currentLanguage = i18n.language;
+  const [showAssistant, setShowAssistant] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowAssistant(true);
+    }, 1300);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
-    <div className="bg-primary/60 h-full">
+    <div className="relative bg-primary/60 h-full overflow-hidden">
       {/* text */}
       <div
         className="w-full h-full bg-gradient-to-r from-primary/10
@@ -88,6 +96,20 @@ const Home = () => {
           <Avatar />
         </motion.div>
       </div>
+
+      {showAssistant ? (
+        <motion.div
+          variants={fadeIn("up", 0)}
+          initial="hidden"
+          animate="show"
+          exit="hidden"
+          className="absolute inset-0 z-20 flex items-center justify-center px-4 pt-28 pb-24 xl:pb-16 pointer-events-none"
+        >
+          <div className="w-full max-w-3xl pointer-events-auto">
+            <AiAssistantPanel />
+          </div>
+        </motion.div>
+      ) : null}
     </div>
   );
 };
