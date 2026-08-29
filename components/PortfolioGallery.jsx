@@ -10,6 +10,7 @@ const LazyVideo = ({ item, previewing, onPreview, onOpen, lang }) => {
   const containerRef = useRef(null);
   const videoRef = useRef(null);
   const [nearViewport, setNearViewport] = useState(false);
+  const [showVideo, setShowVideo] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
@@ -25,7 +26,7 @@ const LazyVideo = ({ item, previewing, onPreview, onOpen, lang }) => {
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-    if (previewing) video.play().catch(() => {});
+    if (previewing) video.play().catch(() => setShowVideo(false));
     else {
       video.pause();
       video.currentTime = 0;
@@ -38,7 +39,10 @@ const LazyVideo = ({ item, previewing, onPreview, onOpen, lang }) => {
     <article ref={containerRef} className={`group relative overflow-hidden rounded-3xl border border-white/10 bg-[#191a31]/85 ${item.aspectRatio === "9:16" ? "sm:row-span-2" : ""}`}>
       <button type="button" onClick={onOpen} onMouseEnter={() => onPreview()} onMouseLeave={() => onPreview(null)} onFocus={() => onPreview()} onBlur={() => onPreview(null)} aria-label={`${lang === "tr" ? "Videoyu oynat" : "Play video"}: ${title}`} className="block h-full w-full text-left">
         <div className={`relative overflow-hidden bg-black/30 ${ratioClass[item.aspectRatio] || "aspect-video"}`}>
-          <video ref={videoRef} muted playsInline loop preload="none" poster={item.cover.url} className="h-full w-full object-cover" aria-label={title}>
+          {/* Cloudinary cover URLs are user-managed at runtime, so keep the original asset instead of proxying it. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={item.cover.url} alt="" loading="lazy" decoding="async" className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-300 ${showVideo ? "opacity-0" : "opacity-100"}`} />
+          <video ref={videoRef} muted playsInline loop preload="none" poster={item.cover.url} onPlaying={() => previewing && setShowVideo(true)} onPause={() => setShowVideo(false)} onWaiting={() => setShowVideo(false)} className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-300 ${showVideo ? "opacity-100" : "opacity-0"}`} aria-label={title}>
             {nearViewport ? <source src={item.video.url} /> : null}
           </video>
           <div className="absolute inset-0 bg-gradient-to-t from-[#111222] via-transparent to-transparent" />
