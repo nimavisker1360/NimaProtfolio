@@ -7,7 +7,7 @@ A bilingual English/Turkish portfolio built with the Next.js Pages Router. It pr
 Requirements: Node.js 20.9+ and npm.
 
 1. Install dependencies with `npm install`.
-2. Copy `.env.example` to `.env.local` and fill in the MongoDB and Cloudinary values.
+2. Copy `.env.example` to `.env.local` and fill in the required values.
 3. Generate the two print-ready CV files after resume content changes with `npm run generate:cv`.
 4. Start the project with `npm run dev`.
 
@@ -34,9 +34,9 @@ Do not copy large portfolio videos into `public` or commit them to Git.
 
 The manager intentionally has no username or password. Anyone who can reach `/admin/portfolio` can create, edit, publish, or delete portfolio entries. Admin APIs remain rate-limited, and browser mutations must come from the same origin. For a public deployment, restrict `/admin/*` and `/api/admin/*` at the hosting or reverse-proxy layer if access should not be public.
 
-## Optional existing integrations
+## Contact form and optional integrations
 
-The contact form uses the three `NEXT_PUBLIC_EMAILJS_*` values. Without them, it reports that it is unavailable and keeps verified professional links visible. The optional website assistant reads `OPENAI_API_KEY` only from server environment variables.
+The contact form sends through Gmail on the server. Set `SMTP_USER` to the Google account that owns the app password, set `SMTP_APP_PASSWORD` to its 16-character app password, and set `CONTACT_TO_EMAIL` to the inbox that should receive submissions. Keep all three values server-only and configure them in the deployment environment as well as `.env.local`. The optional website assistant reads `OPENAI_API_KEY` only from server environment variables.
 
 ## Verification and deployment
 
