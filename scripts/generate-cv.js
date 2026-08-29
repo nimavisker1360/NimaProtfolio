@@ -61,6 +61,71 @@ const projects = [
   ["Cryp-Go Website", "Full Stack", "https://forex-signal-wine.vercel.app/"],
 ];
 
+const creativeProjectsByRole = {
+  video: [
+    {
+      id: "6a9286d3726e5afd28e13fc8",
+      en: "Modern Furnished 1+1 Apartment",
+      tr: "Modern ve Eşyalı 1+1 Daire",
+    },
+    { id: "6a92cd6be7a73fba4dc0dc43", en: "Kibris", tr: "Kibris" },
+    {
+      id: "6a92f78d817b94dace54afc2",
+      en: "Long Beach Coastal Atmosphere",
+      tr: "Long Beach’in Sahil Atmosferi",
+    },
+    {
+      id: "6a92f5e8817b94dace54afbf",
+      en: "Northern Cyprus",
+      tr: "Kuzey Kıbrıs",
+    },
+  ],
+  social: [
+    {
+      id: "6a928262726e5afd28e13fa6",
+      en: "This Key Opens More Than a Door",
+      tr: "Bu Anahtar Sadece Bir Kapıyı Açmaz",
+    },
+    {
+      id: "6a92f503817b94dace54afbb",
+      en: "About HB Real Estate",
+      tr: "Gayrimenkul Alırken Şansa",
+    },
+    {
+      id: "6a92f823817b94dace54afc4",
+      en: "Exclusive Living & Investment",
+      tr: "Ayrıcalıklı Yaşam ve Yatırım",
+    },
+    {
+      id: "6a92fc92817b94dace54afca",
+      en: "Vadi Evleri Campaign",
+      tr: "Vadi Evleri Kampanyası",
+    },
+  ],
+  ai: [
+    {
+      id: "6a92fa78817b94dace54afc6",
+      en: "Nigo Online Shop",
+      tr: "Nigo Online Shop",
+    },
+    {
+      id: "6a92fc1f817b94dace54afc8",
+      en: "HB Kibris",
+      tr: "HB Kibris",
+    },
+    {
+      id: "6a92fd01817b94dace54afcc",
+      en: "Nigo Avenue Online Shop",
+      tr: "Nigo Avenue Online Shop",
+    },
+    {
+      id: "6a92fe84817b94dace54afce",
+      en: "HB Real Estate AI Video",
+      tr: "HB Real Estate AI Videosu",
+    },
+  ],
+};
+
 const stack = [
   "HTML",
   "CSS",
@@ -156,6 +221,35 @@ const content = {
     creativePortfolioText:
       "AI video, editing, motion graphics, graphic design, real estate, fashion, product and social media work.",
     viewPortfolio: "View verified creative work",
+    creativeProjectsTitle: "CREATIVE MEDIA PROJECTS",
+    creativeProjectsIntro:
+      "Selected published work from the portfolio — every project title is a direct, clickable link.",
+    creativeRoles: [
+      {
+        key: "video",
+        title: "VIDEO EDITOR & MOTION DESIGNER",
+        description:
+          "Editing, pacing, transitions, motion graphics, text animation, sound cleanup and polished delivery for vertical advertising and brand films.",
+        allLabel: "View all video editing projects",
+        category: "video-editing",
+      },
+      {
+        key: "social",
+        title: "SOCIAL MEDIA CONTENT SPECIALIST",
+        description:
+          "Platform-focused concepts and 9:16 content for Instagram Reels and digital campaigns, built for attention, clarity and conversion.",
+        allLabel: "View all social media projects",
+        category: "social-media",
+      },
+      {
+        key: "ai",
+        title: "GENERATIVE AI SPECIALIST",
+        description:
+          "Prompt engineering, AI scene and image generation, camera-movement direction and visual consistency for realistic promotional content.",
+        allLabel: "View all AI video projects",
+        category: "ai-videos",
+      },
+    ],
   },
   tr: {
     file: "Nima-Bagheri-CV-TR.pdf",
@@ -229,6 +323,35 @@ const content = {
     creativePortfolioText:
       "Yapay zekâ video, kurgu, hareketli grafik, grafik tasarım, gayrimenkul, moda, ürün ve sosyal medya çalışmaları.",
     viewPortfolio: "Doğrulanmış yaratıcı çalışmaları görüntüle",
+    creativeProjectsTitle: "YARATICI MEDYA PROJELERİ",
+    creativeProjectsIntro:
+      "Portfolyoda yayınlanan seçili çalışmalar — her proje başlığı doğrudan ve tıklanabilir bir bağlantıdır.",
+    creativeRoles: [
+      {
+        key: "video",
+        title: "VİDEO EDİTÖRÜ VE HAREKETLİ GRAFİK TASARIMCISI",
+        description:
+          "Dikey reklamlar ve marka filmleri için kurgu, ritim, geçiş, hareketli grafik, metin animasyonu, ses temizleme ve profesyonel final teslimi.",
+        allLabel: "Tüm video kurgu projelerini görüntüle",
+        category: "video-editing",
+      },
+      {
+        key: "social",
+        title: "SOSYAL MEDYA İÇERİK UZMANI",
+        description:
+          "Instagram Reels ve dijital kampanyalar için dikkat, netlik ve dönüşüm odaklı fikirler ve platforma uygun 9:16 içerikler.",
+        allLabel: "Tüm sosyal medya projelerini görüntüle",
+        category: "social-media",
+      },
+      {
+        key: "ai",
+        title: "ÜRETKEN YAPAY ZEKÂ UZMANI",
+        description:
+          "Gerçekçi tanıtım içerikleri için prompt tasarımı, yapay zekâ sahne ve görsel üretimi, kamera hareketi yönetimi ve görsel tutarlılık.",
+        allLabel: "Tüm yapay zekâ video projelerini görüntüle",
+        category: "ai-videos",
+      },
+    ],
   },
 };
 
@@ -539,7 +662,7 @@ function drawSecondPage(doc, copy) {
     .font("Bold")
     .fontSize(8.2)
     .fillColor("#d8b4fe")
-    .text("02 / 02", 478, 39, { width: 74, align: "right" });
+    .text("02 / 03", 478, 39, { width: 74, align: "right" });
 
   sectionHeading(doc, copy.portfolioTitle, margin, 119, leftWidth);
   doc
@@ -625,6 +748,143 @@ function drawSecondPage(doc, copy) {
   addPageNumber(doc, 2);
 }
 
+function creativeProjectUrl(locale, id) {
+  const localePath = locale === "tr" ? "/tr" : "";
+  return `${profile.websiteUrl}${localePath}/creative-work?project=${id}`;
+}
+
+function drawThirdPage(doc, copy, locale) {
+  const margin = 42;
+  const contentWidth = 511;
+
+  doc.rect(0, 0, 595.28, 92).fill(colors.sidebar);
+  doc.rect(0, 88, 595.28, 4).fill(colors.fuchsia);
+  doc
+    .font("Bold")
+    .fontSize(18)
+    .fillColor(colors.white)
+    .text(profile.name, margin, 29, { width: 210 });
+  doc
+    .font("Regular")
+    .fontSize(8)
+    .fillColor("#c9c1d7")
+    .text(copy.role, margin, 56, { width: 390, characterSpacing: 0.25 });
+  doc
+    .font("Bold")
+    .fontSize(8.2)
+    .fillColor("#f0abfc")
+    .text("03 / 03", 478, 39, { width: 74, align: "right" });
+
+  sectionHeading(doc, copy.creativeProjectsTitle, margin, 118, contentWidth);
+  doc
+    .font("Regular")
+    .fontSize(8)
+    .fillColor(colors.muted)
+    .text(copy.creativeProjectsIntro, margin, 145, {
+      width: contentWidth,
+    });
+
+  const cardYPositions = [178, 346, 514];
+  const cardFills = ["#f5f1fb", "#f8f2f9", "#f2f0fb"];
+  const cardAccents = [colors.purple, colors.fuchsia, "#5b4dd8"];
+
+  copy.creativeRoles.forEach((role, roleIndex) => {
+    const y = cardYPositions[roleIndex];
+    const projectsForRole = creativeProjectsByRole[role.key];
+    const accent = cardAccents[roleIndex];
+
+    doc.roundedRect(margin, y, contentWidth, 154, 11).fill(cardFills[roleIndex]);
+    doc.roundedRect(margin, y, 6, 154, 3).fill(accent);
+    doc
+      .font("Bold")
+      .fontSize(10.1)
+      .fillColor(accent)
+      .text(role.title, margin + 20, y + 17, {
+        width: 330,
+        characterSpacing: 0.45,
+      });
+    doc
+      .font("Bold")
+      .fontSize(7.1)
+      .fillColor(accent)
+      .text(role.allLabel, margin + 357, y + 18, {
+        width: 135,
+        align: "right",
+        link: `${profile.websiteUrl}${locale === "tr" ? "/tr" : ""}/creative-work?category=${role.category}`,
+        underline: true,
+      });
+    doc
+      .font("Regular")
+      .fontSize(7.8)
+      .fillColor(colors.muted)
+      .text(role.description, margin + 20, y + 41, {
+        width: contentWidth - 40,
+        lineGap: 1.5,
+      });
+
+    projectsForRole.forEach((project, projectIndex) => {
+      const column = projectIndex % 2;
+      const row = Math.floor(projectIndex / 2);
+      const projectX = margin + 20 + column * 238;
+      const projectY = y + 91 + row * 28;
+      const label = project[locale] || project.en;
+
+      doc.circle(projectX + 2.5, projectY + 4.5, 1.7).fill(accent);
+      doc
+        .font("Bold")
+        .fontSize(7.4)
+        .fillColor(colors.ink)
+        .text(label, projectX + 11, projectY, {
+          width: 215,
+          height: 19,
+          lineGap: 0.5,
+          link: creativeProjectUrl(locale, project.id),
+          underline: true,
+          ellipsis: true,
+        });
+    });
+  });
+
+  doc
+    .roundedRect(margin, 698, contentWidth, 70, 11)
+    .fill(colors.sidebar);
+  doc
+    .font("Bold")
+    .fontSize(10)
+    .fillColor(colors.white)
+    .text(copy.creativePortfolioTitle, margin + 20, 713, { width: 180 });
+  doc
+    .font("Regular")
+    .fontSize(8)
+    .fillColor("#d6d0df")
+    .text(copy.creativePortfolioText, margin + 20, 733, {
+      width: 345,
+      lineGap: 1.5,
+    });
+  doc
+    .roundedRect(442, 716, 91, 30, 8)
+    .fill(colors.purple);
+  doc
+    .font("Bold")
+    .fontSize(7.4)
+    .fillColor(colors.white)
+    .text(locale === "tr" ? "PORTFOLYOYU AÇ" : "OPEN PORTFOLIO", 450, 726, {
+      width: 75,
+      align: "center",
+      link: `${profile.websiteUrl}${locale === "tr" ? "/tr" : ""}/creative-work`,
+    });
+
+  doc
+    .font("Regular")
+    .fontSize(7.5)
+    .fillColor("#8d8699")
+    .text(profile.website, margin, 810, {
+      width: 150,
+      link: profile.websiteUrl,
+    });
+  addPageNumber(doc, 3);
+}
+
 function makePdf(locale) {
   const copy = content[locale];
   const outputPath = path.join(outputDir, copy.file);
@@ -651,6 +911,8 @@ function makePdf(locale) {
   drawFirstPage(doc, copy);
   doc.addPage();
   drawSecondPage(doc, copy);
+  doc.addPage();
+  drawThirdPage(doc, copy, locale);
   doc.end();
 
   return new Promise((resolve, reject) => {

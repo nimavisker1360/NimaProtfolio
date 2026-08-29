@@ -36,7 +36,7 @@ const LazyVideo = ({ item, previewing, onPreview, onOpen, lang }) => {
   const title = item.title?.[lang] || item.title?.en || (lang === "tr" ? "İsimsiz proje" : "Untitled project");
   const meta = [item.clientIndustry, item.year].filter(Boolean).join(" · ");
   return (
-    <article ref={containerRef} className={`group relative overflow-hidden rounded-3xl border border-white/10 bg-[#191a31]/85 ${item.aspectRatio === "9:16" ? "sm:row-span-2" : ""}`}>
+    <article id={`project-${item._id}`} ref={containerRef} className={`group relative overflow-hidden rounded-3xl border border-white/10 bg-[#191a31]/85 ${item.aspectRatio === "9:16" ? "sm:row-span-2" : ""}`}>
       <button type="button" onClick={onOpen} onMouseEnter={() => onPreview()} onMouseLeave={() => onPreview(null)} onFocus={() => onPreview()} onBlur={() => onPreview(null)} aria-label={`${lang === "tr" ? "Videoyu oynat" : "Play video"}: ${title}`} className="block h-full w-full text-left">
         <div className={`relative overflow-hidden bg-black/30 ${ratioClass[item.aspectRatio] || "aspect-video"}`}>
           {/* Cloudinary cover URLs are user-managed at runtime, so keep the original asset instead of proxying it. */}
@@ -102,15 +102,32 @@ const PortfolioGallery = ({ items }) => {
   const router = useRouter();
   const lang = router.locale === "tr" ? "tr" : "en";
   const requested = typeof router.query.category === "string" ? router.query.category : "all";
+  const requestedProject = typeof router.query.project === "string" ? router.query.project : "";
   const [filter, setFilter] = useState(PORTFOLIO_CATEGORIES.some((item) => item.value === requested) ? requested : "all");
   const [previewId, setPreviewId] = useState(null);
-  const [modalItem, setModalItem] = useState(null);
   const filtered = filter === "all" ? items : items.filter((item) => item.categories.includes(filter));
+  const modalItem = requestedProject
+    ? items.find((item) => String(item._id) === requestedProject) || null
+    : null;
 
   const changeFilter = (value) => {
     setFilter(value);
     setPreviewId(null);
     router.replace({ pathname: router.pathname, query: value === "all" ? {} : { category: value } }, undefined, { shallow: true, locale: router.locale });
+  };
+
+  const openProject = (item) => {
+    router.push({
+      pathname: router.pathname,
+      query: { ...(filter === "all" ? {} : { category: filter }), project: String(item._id) },
+    }, undefined, { shallow: true, locale: router.locale });
+  };
+
+  const closeProject = () => {
+    router.replace({
+      pathname: router.pathname,
+      query: filter === "all" ? {} : { category: filter },
+    }, undefined, { shallow: true, locale: router.locale });
   };
 
   return (
@@ -121,7 +138,7 @@ const PortfolioGallery = ({ items }) => {
       </div>
       {filtered.length ? (
         <div className="grid items-start gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {filtered.map((item) => <LazyVideo key={item._id} item={item} lang={lang} previewing={previewId === item._id} onPreview={(value = item._id) => setPreviewId(value)} onOpen={() => setModalItem(item)} />)}
+          {filtered.map((item) => <LazyVideo key={item._id} item={item} lang={lang} previewing={previewId === item._id} onPreview={(value = item._id) => setPreviewId(value)} onOpen={() => openProject(item)} />)}
         </div>
       ) : (
         <div className="rounded-3xl border border-dashed border-white/20 bg-white/[0.03] px-6 py-16 text-center">
@@ -129,7 +146,7 @@ const PortfolioGallery = ({ items }) => {
           <p>{lang === "tr" ? "Doğrulanmış proje medyaları ve ayrıntıları yönetim panelinden eklendiğinde burada görünecek." : "Verified project media and details will appear here after they are published through the portfolio manager."}</p>
         </div>
       )}
-      <VideoModal item={modalItem} lang={lang} onClose={() => setModalItem(null)} />
+      <VideoModal item={modalItem} lang={lang} onClose={closeProject} />
     </>
   );
 };
