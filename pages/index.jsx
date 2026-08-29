@@ -1,101 +1,86 @@
-import ParticleContainer from "../components/ParticlesContainer";
-import Avatar from "../components/Avatar";
+import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
+import { serverSideTranslations } from "next-i18next/pages/serverSideTranslations";
+import { HiArrowDownTray, HiArrowRight } from "react-icons/hi2";
+import Seo from "../components/Seo";
 
-import { fadeIn } from "../variants";
-import ProjectsBtn from "../components/ProjectsBtn";
+const copy = {
+  en: {
+    role: "Full-Stack Developer, AI Video Creator & Graphic Designer",
+    intro: "I combine software engineering, visual storytelling and generative AI to build modern digital products and create high-impact visual content for brands.",
+    creative: "View Creative Work",
+    development: "View Development Projects",
+    cv: "Download CV",
+    contact: "Let’s Work Together",
+  },
+  tr: {
+    role: "Full-Stack Geliştirici, Yapay Zekâ Video Üreticisi ve Grafik Tasarımcı",
+    intro: "Yazılım geliştirme, görsel hikâye anlatımı ve üretken yapay zekâyı bir araya getirerek modern dijital ürünler ve markalar için etkili görsel içerikler üretiyorum.",
+    creative: "Yaratıcı Çalışmaları Gör",
+    development: "Yazılım Projelerini Gör",
+    cv: "CV’mi İndir",
+    contact: "Birlikte Çalışalım",
+  },
+};
 
 const Home = () => {
-  const { t, i18n } = useTranslation("common");
-  const currentLanguage = i18n.language;
+  const { locale } = useRouter();
+  const lang = locale === "tr" ? "tr" : "en";
+  const content = copy[lang];
+  const cv = lang === "tr" ? "/cv/Nima-Bagheri-CV-TR.pdf" : "/cv/Nima-Bagheri-CV-EN.pdf";
 
   return (
-    <div className="relative bg-primary/60 h-full overflow-hidden">
-      {/* text */}
-      <div
-        className="w-full h-full bg-gradient-to-r from-primary/10
-      via-black/30 to-black/10"
-      >
-        <div className="text-center flex flex-col xl:ml-[12rem] justify-center xl:pt-40 xl:text-left h-full container mx-auto">
-          {/* title */}
-          <motion.h1
-            variants={fadeIn("down", 0.2)}
-            initial="hidden"
-            animate="show"
-            exit="hidden"
-            className="h1"
-          >
-            {currentLanguage === "tr"
-              ? "Fikirleri Dönüştürmek"
-              : "Transforming Ideas"}{" "}
-            <br />
-            {currentLanguage === "tr" ? (
-              <span className="text-red-500">Dijital Gerçekliğe</span>
-            ) : (
-              <>
-                Into <span className="text-red-500">Digital Reality</span>
-              </>
-            )}
-          </motion.h1>
-          {/* subtitle */}
-          <motion.p
-            variants={fadeIn("down", 0.3)}
-            initial="hidden"
-            animate="show"
-            exit="hidden"
-            className="max-w-sm xl:max-w-xl mx-auto xl:mx-0 mb-10 xl:mb-16"
-          >
-            {t("developer")}
-          </motion.p>
-          {/* btn */}
-          <div className="flex justify-center xl:hidden relative">
-            <ProjectsBtn />
-          </div>
+    <>
+      <Seo page="home" />
+      <section className="relative flex min-h-screen w-full max-w-full items-center overflow-hidden bg-primary/25 px-4 pb-28 pt-32 sm:px-8 xl:pb-16 xl:pt-28">
+        <div className="container relative z-10 mx-auto grid w-full min-w-0 max-w-full items-center gap-10 xl:grid-cols-[1.08fr_.92fr] xl:pr-24">
           <motion.div
-            variants={fadeIn("down", 0.4)}
-            initial="hidden"
-            animate="show"
-            exit="hidden"
-            className="hidden xl:flex"
+            initial={{ opacity: 1, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55 }}
+            className="w-full min-w-0 max-w-full text-center xl:text-left"
           >
-            <ProjectsBtn />
+            <p className="mb-3 text-sm font-medium uppercase tracking-[0.28em] text-accent">Portfolio · 2026</p>
+            <h1 className="mb-4 break-words text-4xl font-bold leading-tight sm:text-6xl xl:text-7xl">Nima Bagheri</h1>
+            <h2 className="mx-auto mb-6 w-full max-w-3xl break-words text-xl font-semibold leading-relaxed text-white/90 sm:text-2xl xl:mx-0 xl:text-3xl">
+              {content.role}
+            </h2>
+            <p className="mx-auto mb-8 w-full max-w-2xl break-words text-base text-white/70 sm:text-lg xl:mx-0">{content.intro}</p>
+            <div className="mx-auto flex w-full max-w-sm flex-col gap-3 sm:max-w-none sm:flex-row sm:flex-wrap sm:justify-center xl:mx-0 xl:justify-start">
+              <Link href="/creative-work" className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-purple-700 to-fuchsia-600 px-5 py-3 text-center text-sm font-semibold shadow-lg shadow-purple-950/30 transition hover:-translate-y-0.5 sm:w-auto">
+                {content.creative}<HiArrowRight aria-hidden="true" />
+              </Link>
+              <Link href="/work" className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/25 bg-white/5 px-5 py-3 text-center text-sm font-semibold transition hover:border-accent hover:bg-accent/10 sm:w-auto">
+                {content.development}<HiArrowRight aria-hidden="true" />
+              </Link>
+              <a href={cv} download className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/25 bg-white/5 px-5 py-3 text-center text-sm font-semibold transition hover:border-accent hover:bg-accent/10 sm:w-auto">
+                {content.cv}<HiArrowDownTray aria-hidden="true" />
+              </a>
+              <Link href="/contact" className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-accent/70 bg-accent/10 px-5 py-3 text-center text-sm font-semibold text-white transition hover:bg-accent/20 sm:w-auto">
+                {content.contact}<HiArrowRight aria-hidden="true" />
+              </Link>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 1, scale: 0.97 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7 }}
+            className="relative mx-auto hidden aspect-square w-full max-w-[560px] xl:block"
+          >
+            <div className="absolute inset-[8%] rounded-full bg-gradient-to-br from-purple-500/35 via-fuchsia-500/10 to-transparent blur-3xl" />
+            <Image src="/avatar.png" fill priority sizes="(min-width: 1280px) 44vw, 1px" alt={lang === "tr" ? "Nima Bagheri portre görseli" : "Portrait of Nima Bagheri"} className="object-contain object-bottom drop-shadow-2xl" />
           </motion.div>
         </div>
-      </div>
-      {/* image */}
-      <div className="w-[1200px] h-[800px] absolute right-0 bottom-0">
-        {/* bg image */}
-        <div
-          className="bg-none xl:bg-native xl:bg-cover xl:bg-right xl:bg-no-repeat opacity-50 
-        w-full h-full absolute mix-blend-color-dodge translate-z-0"
-        ></div>
-        {/* particles */}
-        <ParticleContainer />
-        {/* avatar */}
-        <motion.div
-          variants={fadeIn("up", 0.5)}
-          initial="hidden"
-          animate="show"
-          exit="hidden"
-          transition={{ duration: 1, ease: "easeInOut" }}
-          className="w-full h-full max-w-[737px] max-h-[678px] absolute -bottom-32 lg:bottom-0 lg:right-[8%]"
-        >
-          <Avatar />
-        </motion.div>
-      </div>
-
-    </div>
+      </section>
+    </>
   );
 };
 
 export async function getStaticProps({ locale }) {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, ["common"])),
-    },
-  };
+  return { props: { ...(await serverSideTranslations(locale, ["common"])) } };
 }
 
 export default Home;

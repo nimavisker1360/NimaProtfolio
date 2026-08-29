@@ -1,91 +1,26 @@
-// components
-import TestimonialSlider from "../../components/TestimonialSlider";
-import ParticlesContainer from "../../components/ParticlesContainer";
-// framer motion
-import { motion } from "framer-motion";
-import { fadeIn } from "../../variants";
-// i18n
-import { useTranslation } from "next-i18next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useRouter } from "next/router";
+import { serverSideTranslations } from "next-i18next/pages/serverSideTranslations";
+import Seo from "../../components/Seo";
 
 const Testimonials = () => {
-  const { t, i18n } = useTranslation("common");
-
-  const testimonialTranslations = {
-    en: {
-      title: "What clients",
-      say: "say.",
-    },
-    tr: {
-      title: "Müşteriler ne",
-      say: "diyor.",
-    },
-  };
-
-  const currentLang = i18n.language || "en";
-  const content =
-    testimonialTranslations[currentLang] || testimonialTranslations.en;
-
+  const { locale } = useRouter();
+  const tr = locale === "tr";
   return (
-    <div className="h-full bg-primary/30 py-32 text-center">
-      <div className="container mx-auto h-full flex flex-col justify-center">
-        <ParticlesContainer />
-        {/* language toggle - hidden on mobile, visible on md screens and up */}
-        <div className="absolute top-8 right-8 z-10 hidden md:block">
-          <div className="flex space-x-2">
-            <button
-              className={`px-3 py-1 rounded ${
-                i18n.language === "en"
-                  ? "bg-accent text-white"
-                  : "bg-gray-800 text-gray-400"
-              }`}
-              onClick={() => i18n.changeLanguage("en")}
-            >
-              EN
-            </button>
-            <span className="text-white/50 flex items-center">|</span>
-            <button
-              className={`px-3 py-1 rounded ${
-                i18n.language === "tr"
-                  ? "bg-accent text-white"
-                  : "bg-gray-800 text-gray-400"
-              }`}
-              onClick={() => i18n.changeLanguage("tr")}
-            >
-              TR
-            </button>
-          </div>
+    <>
+      <Seo page="testimonials" />
+      <section className="flex min-h-screen items-center bg-primary/30 px-4 pb-28 pt-32 sm:px-8 xl:pb-16 xl:pr-28">
+        <div className="container mx-auto max-w-3xl rounded-3xl border border-white/10 bg-[#191a31]/75 p-8 text-center backdrop-blur-md sm:p-14">
+          <p className="mb-2 text-sm font-semibold uppercase tracking-[0.24em] text-accent">{tr ? "Referanslar" : "Testimonials"}</p>
+          <h1 className="mb-4 text-4xl font-bold sm:text-5xl">{tr ? "Doğrulanmış geri bildirimler" : "Verified client feedback"}</h1>
+          <p className="text-white/65">{tr ? "Bu bölüm yalnızca doğrulanmış ve yayınlanması onaylanmış müşteri geri bildirimlerini gösterecektir. Şu anda yayınlanmış bir referans bulunmuyor." : "This section is reserved for verified client feedback approved for publication. No testimonials are currently published."}</p>
         </div>
-        {/* title */}
-        <motion.h2
-          variants={fadeIn("up", 0.2)}
-          initial="hidden"
-          animate="show"
-          exit="hidden"
-          className="h2 mb-8 xl:mb-0"
-        >
-          {content.title} <span className="text-accent">{content.say}</span>
-        </motion.h2>
-        {/* slider */}
-        <motion.div
-          variants={fadeIn("up", 0.4)}
-          initial="hidden"
-          animate="show"
-          exit="hidden"
-        >
-          <TestimonialSlider />
-        </motion.div>
-      </div>
-    </div>
+      </section>
+    </>
   );
 };
 
 export async function getStaticProps({ locale }) {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, ["common"])),
-    },
-  };
+  return { props: { ...(await serverSideTranslations(locale, ["common"])) } };
 }
 
 export default Testimonials;

@@ -3,11 +3,14 @@
   "hakkimda": "Hakkımda",
   "hizmetler": "Hizmetler",
   "calismalar": "Çalışmalarım",
+  "creative": "Yaratıcı Çalışmalar",
+  "development": "Yazılım Projeleri",
+  "resume": "Özgeçmiş",
   "gorusler": "Görüşler",
   "iletisim": "İletişim",
   "merhaba": "Merhaba",
   "adim": "Benim adım",
-  "developer": "Web, mobil ve yazılım geliştirme konusunda deneyimli bir Full Stack Yazılım Mühendisiyim. Projelerime ve yeteneklerime göz atabilirsin.",
+  "developer": "Full-Stack Geliştirici, Yapay Zekâ Video Üreticisi ve Grafik Tasarımcı",
   "projelerim": "Projelerim",
   "benimHakkimda": "Benim Hakkımda",
   "yeteneklerim": "Yeteneklerim",
@@ -37,6 +40,6 @@
     "title": "Çalışmalarım",
     "point1": "Konseptten yayına kadar web siteleri ve açılış sayfaları uyguladım.",
     "point2": "UX ve UI tasarımlarını teknik fizibilite açısından değerlendirdim.",
-    "point3": "En son teknoloji çözümlerinde deneyimli, 𝐅𝐫𝐨𝐧𝐭-𝐞𝐧𝐝 ve 𝐁𝐚𝐜𝐤𝐞𝐧𝐝 konularında yetenekli ve tutkulu teknik profesyonellerden oluşan yetenekli bir havuzumuz var."
+    "point3": "İş hedeflerini pratik frontend ve backend çözümleriyle birleştiriyorum."
   }
 }

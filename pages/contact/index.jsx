@@ -1,168 +1,73 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
+import { useRouter } from "next/router";
+import { serverSideTranslations } from "next-i18next/pages/serverSideTranslations";
 import { BsArrowRight } from "react-icons/bs";
-import { motion } from "framer-motion";
-import { fadeIn } from "../../variants";
-import Circles from "../../components/Circles";
-import ParticlesContainer from "../../components/ParticlesContainer";
-// i18n
-import { useTranslation } from "next-i18next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import Seo from "../../components/Seo";
+import { SOCIAL_LINKS } from "../../lib/content";
+
+const copy = {
+  en: { eyebrow: "Start a project", title: "Let’s work together.", description: "Tell me about your software, AI video, editing or design project. I’ll respond through the contact channel configured for this site.", name: "Name", email: "Email", subject: "Subject", message: "Message", submit: "Send message", success: "Your message was sent successfully.", failed: "The message could not be sent. Please use one of the professional links below.", unavailable: "The contact form is being configured. You can reach me through the verified professional links below." },
+  tr: { eyebrow: "Bir proje başlatın", title: "Birlikte çalışalım.", description: "Yazılım, yapay zekâ video, kurgu veya tasarım projenizden bahsedin. Bu site için yapılandırılmış iletişim kanalı üzerinden yanıt vereceğim.", name: "İsim", email: "E-posta", subject: "Konu", message: "Mesaj", submit: "Mesaj gönder", success: "Mesajınız başarıyla gönderildi.", failed: "Mesaj gönderilemedi. Lütfen aşağıdaki profesyonel bağlantılardan birini kullanın.", unavailable: "İletişim formu yapılandırılıyor. Aşağıdaki doğrulanmış profesyonel bağlantılardan bana ulaşabilirsiniz." },
+};
 
 const Contact = () => {
-  const form = useRef();
-  const { t, i18n } = useTranslation("common");
-
-  const contactTranslations = {
-    en: {
-      title: "Let's",
-      connect: "connect.",
-      name: "name",
-      email: "email",
-      subject: "subject",
-      message: "message",
-      button: "Let's talk",
-    },
-    tr: {
-      title: "İletişime",
-      connect: "geçelim.",
-      name: "isim",
-      email: "e-posta",
-      subject: "konu",
-      message: "mesaj",
-      button: "Konuşalım",
-    },
+  /** @type {React.MutableRefObject<HTMLFormElement | null>} */
+  const form = useRef(null);
+  const { locale } = useRouter();
+  const lang = locale === "tr" ? "tr" : "en";
+  const content = copy[lang];
+  const [status, setStatus] = useState({ sending: false, type: "", message: "" });
+  const config = {
+    service: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+    template: process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
+    key: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY,
   };
+  const configured = Boolean(config.service && config.template && config.key);
 
-  const currentLang = i18n.language || "en";
-  const content = contactTranslations[currentLang] || contactTranslations.en;
-
-  const sendEmail = (e) => {
-    e.preventDefault();
-
-    emailjs
-      .sendForm(
-        "service_fgg4q89",
-        "template_cqkwxlg",
-        form.current,
-        "Aew0_alQl4fz_0v1x"
-      )
-      .then(
-        (result) => {
-          console.log("Email sent:", result.text);
-          alert("Message sent successfully!");
-        },
-        (error) => {
-          console.log("Error:", error.text);
-          alert("Failed to send message.");
-        }
-      );
+  const sendEmail = async (event) => {
+    event.preventDefault();
+    if (!configured) return setStatus({ sending: false, type: "error", message: content.unavailable });
+    setStatus({ sending: true, type: "", message: "" });
+    try {
+      await emailjs.sendForm(config.service, config.template, form.current, config.key);
+      if (form.current) form.current.reset();
+      setStatus({ sending: false, type: "success", message: content.success });
+    } catch {
+      setStatus({ sending: false, type: "error", message: content.failed });
+    }
   };
 
   return (
-    <div className="h-full bg-primary/30">
-      <div className="container mx-auto py-32 text-center xl:text-left flex items-center justify-center h-full">
-        <Circles />
-        <ParticlesContainer />
-
-        {/* language toggle */}
-        <div className="absolute top-8 right-8 z-10 hidden md:block">
-          <div className="flex space-x-2">
-            <button
-              className={`px-3 py-1 rounded ${
-                i18n.language === "en"
-                  ? "bg-accent text-white"
-                  : "bg-gray-800 text-gray-400"
-              }`}
-              onClick={() => i18n.changeLanguage("en")}
-            >
-              EN
-            </button>
-            <span className="text-white/50 flex items-center">|</span>
-            <button
-              className={`px-3 py-1 rounded ${
-                i18n.language === "tr"
-                  ? "bg-accent text-white"
-                  : "bg-gray-800 text-gray-400"
-              }`}
-              onClick={() => i18n.changeLanguage("tr")}
-            >
-              TR
-            </button>
+    <>
+      <Seo page="contact" />
+      <section className="min-h-screen bg-primary/30 px-4 pb-28 pt-32 sm:px-8 xl:pb-16 xl:pr-28">
+        <div className="container mx-auto grid gap-8 lg:grid-cols-[.72fr_1.28fr]">
+          <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-purple-900/40 to-fuchsia-950/20 p-6 backdrop-blur-md sm:p-9">
+            <p className="mb-2 text-sm font-semibold uppercase tracking-[0.24em] text-accent">{content.eyebrow}</p>
+            <h1 className="mb-5 text-4xl font-bold leading-tight sm:text-6xl">{content.title}</h1>
+            <p className="mb-8 text-white/70">{content.description}</p>
+            <div className="space-y-2">{SOCIAL_LINKS.map((social) => <a key={social.key} href={social.href} target="_blank" rel="noopener noreferrer" className="flex items-center justify-between rounded-xl border border-white/10 px-4 py-3 text-sm hover:border-accent"><span>{social.label}</span><BsArrowRight aria-hidden="true" /></a>)}</div>
           </div>
-        </div>
-
-        <div className="flex flex-col w-full max-w-[700px]  z-[50]">
-          <motion.h2
-            variants={fadeIn("up", 0.2)}
-            initial="hidden"
-            animate="show"
-            exit="hidden"
-            className="h2 text-center mb-12"
-          >
-            {content.title}
-            <span className="text-accent">{content.connect}</span>
-          </motion.h2>
-          <motion.form
-            ref={form}
-            onSubmit={sendEmail}
-            variants={fadeIn("up", 0.4)}
-            initial="hidden"
-            animate="show"
-            exit="hidden"
-            className="flex-1 flex flex-col gap-6 w-full mx-auto"
-          >
-            <div className="flex gap-x-6 w-full">
-              <input
-                type="text"
-                name="name"
-                placeholder={content.name}
-                className="input"
-                required
-              />
-              <input
-                type="email"
-                name="email"
-                placeholder={content.email}
-                className="input"
-                required
-              />
+          <form ref={form} onSubmit={sendEmail} className="rounded-3xl border border-white/10 bg-[#191a31]/75 p-6 backdrop-blur-md sm:p-9">
+            <div className="grid gap-5 sm:grid-cols-2">
+              <label className="text-sm font-medium">{content.name}<input required type="text" name="name" autoComplete="name" className="mt-2 w-full rounded-xl border border-white/15 bg-black/20 px-4 py-3" /></label>
+              <label className="text-sm font-medium">{content.email}<input required type="email" name="email" autoComplete="email" className="mt-2 w-full rounded-xl border border-white/15 bg-black/20 px-4 py-3" /></label>
             </div>
-            <input
-              type="text"
-              name="subject"
-              placeholder={content.subject}
-              className="input"
-              required
-            />
-            <textarea
-              name="message"
-              placeholder={content.message}
-              className="textarea"
-              required
-            ></textarea>
-            <button
-              type="submit"
-              className="btn rounded-full border border-white max-w-[170px] px-8 transition-all duration-300 flex items-center justify-center overflow-hidden hover:border-accent group"
-            >
-              <span className="group-hover:-translate-y-[120%] group-hover:opacity-0 transition-all duration-500">
-                {content.button}
-              </span>
-              <BsArrowRight className="-translate-y-[120%] opacity-0 group-hover:flex group-hover:-translate-y-0 group-hover:opacity-100 transition-all duration-300 absolute text-[22px]" />
-            </button>
-          </motion.form>
+            <label className="mt-5 block text-sm font-medium">{content.subject}<input required type="text" name="subject" className="mt-2 w-full rounded-xl border border-white/15 bg-black/20 px-4 py-3" /></label>
+            <label className="mt-5 block text-sm font-medium">{content.message}<textarea required name="message" rows={7} className="mt-2 w-full resize-y rounded-xl border border-white/15 bg-black/20 px-4 py-3" /></label>
+            {!configured && !status.message ? <p className="mt-4 text-sm text-amber-200/80">{content.unavailable}</p> : null}
+            {status.message ? <p role="status" aria-live="polite" className={`mt-4 rounded-xl p-3 text-sm ${status.type === "success" ? "bg-green-500/15 text-green-200" : "bg-red-500/15 text-red-200"}`}>{status.message}</p> : null}
+            <button disabled={status.sending || !configured} className="mt-6 inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-purple-700 to-fuchsia-600 px-7 py-3 font-semibold disabled:cursor-not-allowed disabled:opacity-45">{status.sending ? "…" : content.submit}<BsArrowRight aria-hidden="true" /></button>
+          </form>
         </div>
-      </div>
-    </div>
+      </section>
+    </>
   );
 };
 
 export async function getStaticProps({ locale }) {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, ["common"])),
-    },
-  };
+  return { props: { ...(await serverSideTranslations(locale, ["common"])) } };
 }
 
 export default Contact;

@@ -7,14 +7,17 @@ import { Points, PointMaterial, Preload } from "@react-three/drei";
 import * as random from "maath/random/dist/maath-random.esm";
 
 const StarBackground = (props) => {
-  const ref = useRef();
+  /** @type {React.MutableRefObject<any>} */
+  const ref = useRef(null);
   const [sphere] = useState(() =>
-    random.inSphere(new Float32Array(5000), { radius: 1.2 })
+    random.inSphere(new Float32Array(1800), { radius: 1.2 })
   );
 
   useFrame((state, delta) => {
-    ref.current.rotation.x -= delta / 10;
-    ref.current.rotation.y -= delta / 15;
+    if (ref.current) {
+      ref.current.rotation.x -= delta / 14;
+      ref.current.rotation.y -= delta / 20;
+    }
   });
 
   return (
@@ -34,8 +37,8 @@ const StarBackground = (props) => {
 };
 
 const StarsCanvas = () => (
-  <div className="w-full h-auto fixed inset-0 ">
-    <Canvas camera={{ position: [0, 0, 1] }}>
+  <div aria-hidden="true" className="pointer-events-none fixed inset-0">
+    <Canvas dpr={[1, 1.5]} camera={{ position: [0, 0, 1] }}>
       <Suspense fallback={null}>
         <StarBackground />
       </Suspense>

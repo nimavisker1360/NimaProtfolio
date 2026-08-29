@@ -1,10 +1,8 @@
 import { useRouter } from "next/router";
-import { useTranslation } from "next-i18next";
 
 const LanguageToggle = () => {
   const router = useRouter();
   const { pathname, asPath, query } = router;
-  const { i18n } = useTranslation("common");
   const currentLocale = router.locale;
 
   const changeLanguage = (locale) => {
@@ -12,7 +10,7 @@ const LanguageToggle = () => {
   };
 
   return (
-    <div className="absolute top-8 right-8 z-[100] hidden lg:block">
+    <div className="absolute top-8 right-8 z-[100] hidden lg:block" aria-label="Language selection">
       <div className="flex space-x-2">
         <button
           className={`px-3 py-1 rounded ${
@@ -21,6 +19,8 @@ const LanguageToggle = () => {
               : "bg-gray-800 text-gray-400"
           }`}
           onClick={() => changeLanguage("en")}
+          aria-label="Switch language to English"
+          aria-pressed={currentLocale === "en"}
         >
           EN
         </button>
@@ -32,6 +32,8 @@ const LanguageToggle = () => {
               : "bg-gray-800 text-gray-400"
           }`}
           onClick={() => changeLanguage("tr")}
+          aria-label="Dili Türkçe olarak değiştir"
+          aria-pressed={currentLocale === "tr"}
         >
           TR
         </button>

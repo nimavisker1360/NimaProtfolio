@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { HiArrowRight } from "react-icons/hi2";
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "next-i18next/pages";
 
 const ProjectsBtn = () => {
   const { t } = useTranslation("common");

@@ -2,12 +2,15 @@
   "home": "Home",
   "about": "About",
   "services": "Services",
-  "work": "Work",
+  "work": "Development",
+  "creative": "Creative Work",
+  "development": "Development",
+  "resume": "Resume",
   "testimonials": "Testimonials",
   "contact": "Contact",
   "hello": "Hello",
   "name": "My name is",
-  "developer": "I'm a Full Stack Software Engineer and AI Specialist with experience in Website, Mobile, and Software development. Check out my projects and skills.",
+  "developer": "Full-Stack Developer, AI Video Creator & Graphic Designer",
   "projectsButton": "My Projects",
   "aboutMe": "About me",
   "skills": "My skills",
@@ -37,6 +40,6 @@
     "title": "My work",
     "point1": "Implemented websites, and landing pages 𝐟𝐫𝐨𝐦 𝐜𝐨𝐧𝐜𝐞𝐩𝐭 𝐭𝐨 𝐝𝐞𝐩𝐥𝐨𝐲𝐦𝐞𝐧𝐭.",
     "point2": "Assessed UX and UI designs for technical feasibility.",
-    "point3": "We have a talented pool of technical professionals experienced in the latest technology solutions, skilled and passionate for Front-end, Backend"
+    "point3": "I connect business goals with practical frontend and backend solutions."
   }
 }

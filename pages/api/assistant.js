@@ -1,24 +1,7 @@
 import { siteKnowledge } from "../../lib/siteKnowledge";
-import fs from "fs";
-import path from "path";
+import { getRequestIp, rateLimit } from "../../lib/rateLimit";
 
 const OPENAI_API_URL = "https://api.openai.com/v1/chat/completions";
-
-const getApiKeyFromPagesEnv = () => {
-  try {
-    const filePath = path.join(process.cwd(), "pages", ".env");
-    const content = fs.readFileSync(filePath, "utf8");
-    const match = content.match(/^OPENAI_API_KEY=(.*)$/m);
-
-    if (!match || !match[1]) {
-      return "";
-    }
-
-    return match[1].trim().replace(/^['"]|['"]$/g, "");
-  } catch {
-    return "";
-  }
-};
 
 const getContentAsText = (content) => {
   if (typeof content === "string") {
@@ -51,11 +34,17 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const apiKey = process.env.OPENAI_API_KEY || getApiKeyFromPagesEnv();
+  const attempt = rateLimit(`assistant:${getRequestIp(req)}`, 20, 60_000);
+  if (!attempt.allowed) {
+    res.setHeader("Retry-After", attempt.retryAfter);
+    return res.status(429).json({ error: "Too many requests. Please try again shortly." });
+  }
+
+  const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) {
     return res.status(500).json({
       error:
-        "OPENAI_API_KEY not found. Set it in .env.local or pages/.env and restart the dev server.",
+        "OPENAI_API_KEY not found. Set it in .env.local and restart the development server.",
     });
   }
 
@@ -63,7 +52,7 @@ export default async function handler(req, res) {
   const normalizedQuestion =
     typeof question === "string" ? question.trim() : "";
 
-  if (!normalizedQuestion) {
+  if (!normalizedQuestion || normalizedQuestion.length > 1000) {
     return res.status(400).json({ error: "Question is required." });
   }
 

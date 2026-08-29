@@ -1,25 +1,25 @@
 import "../styles/globals.css";
     
-import StarsCanvas from "../components/sub/StartComponent";
 import Layout from "../components/Layout";
 import Transition from "../components/Transition";
 
 import { useRouter } from "next/router";
-import { AnimatePresence, motion } from "framer-motion";
-import { appWithTranslation } from 'next-i18next';
+import { AnimatePresence, MotionConfig, motion } from "framer-motion";
+import { appWithTranslation } from 'next-i18next/pages';
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
   return (
-    <Layout>
-      <AnimatePresence mode="wait">
-        <motion.div key={router.route} className="h-full">
-          <Transition />
-          <StarsCanvas />
-          <Component {...pageProps} />
-        </motion.div>
-      </AnimatePresence>
-    </Layout>
+    <MotionConfig reducedMotion="user">
+      <Layout>
+        <AnimatePresence mode="wait">
+          <motion.div key={router.route} className="min-h-screen">
+            <Transition />
+            <Component {...pageProps} />
+          </motion.div>
+        </AnimatePresence>
+      </Layout>
+    </MotionConfig>
   );
 }
 
