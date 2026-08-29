@@ -28,6 +28,11 @@ const profile = {
   websiteUrl: "https://mavisker.com",
   contact: [
     {
+      label: "WhatsApp",
+      value: "0552 607 8900",
+      url: "https://wa.me/905526078900",
+    },
+    {
       label: "LinkedIn",
       value: "nima-bagheri-0805541a8",
       url: "https://www.linkedin.com/in/nima-bagheri-0805541a8/",
@@ -507,7 +512,7 @@ function drawFirstPage(doc, copy) {
         width: sidebarContentWidth,
         link: item.url,
       });
-    contactY += 38;
+    contactY += 32;
   });
 
   sectionHeading(doc, copy.highlightsTitle, sidebarX, 300, sidebarContentWidth, true);
