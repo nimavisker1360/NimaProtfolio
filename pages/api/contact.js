@@ -3,11 +3,11 @@ import { z } from "zod";
 import { getRequestIp, rateLimit } from "../../lib/rateLimit";
 
 const contactSchema = z.object({
-  name: z.string().trim().min(2).max(80),
+  name: z.string().trim().min(1).max(80),
   email: z.string().trim().email().max(254),
-  subject: z.string().trim().min(3).max(140),
-  message: z.string().trim().min(10).max(5000),
-  website: z.string().max(0).optional().default(""),
+  subject: z.string().trim().min(1).max(140),
+  message: z.string().trim().min(1).max(5000),
+  website: z.string().max(200).optional(),
 }).strict();
 
 const escapeHtml = (value) => value.replace(/[&<>"']/g, (character) => ({
@@ -30,20 +30,24 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const requestLimit = rateLimit(`contact:${getRequestIp(req)}`, 5, 15 * 60 * 1000);
+  const parsed = contactSchema.safeParse(req.body);
+  if (!parsed.success) return res.status(400).json({ error: "INVALID_FORM" });
+
+  const requestLimit = rateLimit(
+    `contact:v2:${getRequestIp(req)}`,
+    process.env.NODE_ENV === "production" ? 5 : 50,
+    5 * 60 * 1000,
+  );
   if (!requestLimit.allowed) {
     res.setHeader("Retry-After", String(requestLimit.retryAfter));
     return res.status(429).json({ error: "Too many requests" });
   }
 
-  const parsed = contactSchema.safeParse(req.body);
-  if (!parsed.success) return res.status(400).json({ error: "Invalid form data" });
-
   const smtpUser = process.env.SMTP_USER;
   const smtpPassword = process.env.SMTP_APP_PASSWORD?.replace(/\s/g, "");
   const recipient = process.env.CONTACT_TO_EMAIL || smtpUser;
   if (!smtpUser || !smtpPassword || !recipient) {
-    return res.status(503).json({ error: "Contact service unavailable" });
+    return res.status(503).json({ error: "SERVICE_UNAVAILABLE" });
   }
 
   const { name, email, subject, message } = parsed.data;
@@ -65,6 +69,6 @@ export default async function handler(req, res) {
     return res.status(200).json({ ok: true });
   } catch (error) {
     console.error("Contact email delivery failed:", error instanceof Error ? error.message : "Unknown error");
-    return res.status(502).json({ error: "Email delivery failed" });
+    return res.status(502).json({ error: "DELIVERY_FAILED" });
   }
 }
