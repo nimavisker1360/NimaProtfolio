@@ -1,5 +1,4 @@
 import { useRouter } from "next/router";
-import { serverSideTranslations } from "next-i18next/pages/serverSideTranslations";
 import Seo from "../../components/Seo";
 import PortfolioGallery from "../../components/PortfolioGallery";
 
@@ -34,7 +33,7 @@ const CreativeWork = ({ items }) => {
   );
 };
 
-export async function getServerSideProps({ locale }) {
+export async function getServerSideProps() {
   let items = [];
   if (process.env.MONGODB_URI) {
     try {
@@ -46,7 +45,7 @@ export async function getServerSideProps({ locale }) {
       items = [];
     }
   }
-  return { props: { items, ...(await serverSideTranslations(locale, ["common"])) } };
+  return { props: { items } };
 }
 
 export default CreativeWork;
