@@ -45,6 +45,17 @@ const profile = {
   ],
 };
 
+const socialMediaAccounts = [
+  {
+    handle: "@hb_gayrimenkul_international",
+    url: "https://www.instagram.com/hb_gayrimenkul_international/",
+  },
+  {
+    handle: "@nigo.avenue",
+    url: "https://www.instagram.com/nigo.avenue/",
+  },
+];
+
 const projects = [
   ["AI Art Showcase", "Frontend", "https://ai-artshowcase.vercel.app/"],
   ["Portfolio Template", "Frontend", "https://visker-portfolio.vercel.app/"],
@@ -412,7 +423,12 @@ function tagCloud(doc, items, x, y, width, options = {}) {
 
   doc.font("Regular").fontSize(size);
   items.forEach((item) => {
-    const tagWidth = Math.min(doc.widthOfString(item) + paddingX * 2, width);
+    // PDF font metrics can be a few pixels narrower than the rendered glyphs.
+    // Keep a small safety allowance so short labels never wrap letter-by-letter.
+    const tagWidth = Math.min(
+      Math.ceil(doc.widthOfString(item) + paddingX * 2 + 6),
+      width,
+    );
     if (cursorX + tagWidth > x + width) {
       cursorX = x;
       cursorY += tagHeight + 5;
@@ -425,7 +441,9 @@ function tagCloud(doc, items, x, y, width, options = {}) {
       .fillColor(textColor)
       .text(item, cursorX + paddingX, cursorY + 5.1, {
         width: tagWidth - paddingX * 2,
+        height: tagHeight - 4,
         align: "center",
+        lineBreak: false,
       });
     cursorX += tagWidth + 5;
   });
@@ -822,11 +840,27 @@ function drawThirdPage(doc, copy, locale) {
         lineGap: 1.5,
       });
 
+    if (role.key === "social") {
+      socialMediaAccounts.forEach((account, accountIndex) => {
+        doc
+          .font("Bold")
+          .fontSize(7.2)
+          .fillColor(accent)
+          .text(`INSTAGRAM  ${account.handle}`, margin + 20 + accountIndex * 238, y + 72, {
+            width: 220,
+            height: 12,
+            lineBreak: false,
+            link: account.url,
+            underline: true,
+          });
+      });
+    }
+
     projectsForRole.forEach((project, projectIndex) => {
       const column = projectIndex % 2;
       const row = Math.floor(projectIndex / 2);
       const projectX = margin + 20 + column * 238;
-      const projectY = y + 91 + row * 28;
+      const projectY = y + (role.key === "social" ? 101 : 91) + row * (role.key === "social" ? 25 : 28);
       const label = project[locale] || project.en;
 
       doc.circle(projectX + 2.5, projectY + 4.5, 1.7).fill(accent);
